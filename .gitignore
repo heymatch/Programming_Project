@@ -54,5 +54,7 @@ dkms.conf
 *.layout
 *.win
 *.h
-*.res
 *.rc
+*.res
+
+
