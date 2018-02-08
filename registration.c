@@ -1,37 +1,40 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void log_in();
-void sign_in();
+int log_in();
+int sign_in();
 void game_over();
 
 int user_id;
 
 void registration_main(){
-	puts("登入(1)");
-	puts("註冊(2)");
-	puts("離開遊戲(-1)");
-	
 	int selection;
+	int verify;
+	
 	while(selection != -1){
+		pause(2);
+		puts("登入(1)");
+		puts("註冊(2)");
+		puts("離開遊戲(-1)");
+		
 		scanf("%d", &selection);
 		switch(selection){
 			case 1:
-				log_in();
-				pause(2);
+				verify = log_in();
 				break;
 			case 2:
-				sign_in();
+				verify = sign_in();
 				break;
 			case -1:
 				game_over();
 				break;
 		}
-		break;
+		if(verify == 1)
+			break;
 	}
 }
 
-void log_in(){
+int log_in(){
 	char username[20];
 	char password[20];
 	
@@ -42,19 +45,59 @@ void log_in(){
 	
 	if(check_user(username, "username") == 0){
 		puts("Username is not found.");
-		registration_main();
+		return 0;
 	}
 	else if(check_user(password, "password") == 0){
 		puts("Password is incorrect.");
-		registration_main();
+		return 0;
 	}
 	else if(check_user(username, "username") == check_user(password, "password")){
 		puts("Succeed!");
+		return 1;
 	}
 }
 
-void sign_in(){
-	printf("這功能未完成\n");
+int sign_in(){
+	char username[20];
+	char password[20];
+	
+	puts("請輸入新帳號:");
+	scanf("%s", username);
+	if(check_user(username, "username") == 0){
+		puts("請輸入新密碼:");
+		scanf("%s", password);
+		
+		FILE *fregister_username;
+		FILE *fregister_password;
+		FILE *fregister_id;
+		FILE *fcheck_id;
+		fregister_username = fopen("data/account/username.txt", "a");
+		fregister_password = fopen("data/account/password.txt", "a");
+		fcheck_id = fopen("data/account/id.txt", "r");
+		
+		fprintf(fregister_username, "\n%s", username);
+		fprintf(fregister_password, "\n%s", password);
+		int data_id;
+		while(!feof(fcheck_id)){
+			fscanf(fcheck_id, "%d", &data_id);
+		}
+		fregister_id = fopen("data/account/id.txt", "a");
+		fprintf(fregister_id, "\n%d", data_id + 1);
+		
+		puts("帳號已成功建立，請重新登入");
+		FILE *fregister_initialization;
+		fregister_initialization = fopen("data/profile/initialization.txt", "a");
+		fprintf(fregister_initialization, "%d %d",data_id + 1 ,0);
+		
+		fclose(fregister_username);
+		fclose(fregister_password);
+		fclose(fregister_id);
+		fclose(fregister_initialization);
+	}
+	else
+		puts("已有此帳號，請重新註冊");
+	
+	return 0;
 }
 
 void game_over(){
