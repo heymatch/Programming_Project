@@ -1,15 +1,18 @@
 #include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
 #include <windows.h>
 
 void version();
 
 void main() {
+	srand(time(NULL));
 	
 	registration_main();
 	initial_setting();
 	game_main();
 	
-	return ;
+	return;
 }
 
 void pause(int n){
@@ -18,6 +21,6 @@ void pause(int n){
 }
 
 void version(){
-	puts("版本：1.01_beta");
-	puts("更新日：2/7");
+	puts("版本：1.02_beta");
+	puts("更新日：2/8");
 }

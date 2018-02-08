@@ -87,7 +87,7 @@ int sign_in(){
 		puts("帳號已成功建立，請重新登入");
 		FILE *fregister_initialization;
 		fregister_initialization = fopen("data/profile/initialization.txt", "a");
-		fprintf(fregister_initialization, "%d %d",data_id + 1 ,0);
+		fprintf(fregister_initialization, "\n%d %d",data_id + 1 ,0);
 		
 		fclose(fregister_username);
 		fclose(fregister_password);
