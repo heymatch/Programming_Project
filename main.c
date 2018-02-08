@@ -21,6 +21,6 @@ void pause(int n){
 }
 
 void version(){
-	puts("版本：1.02_beta");
+	puts("版本：1.2_beta");
 	puts("更新日：2/8");
 }

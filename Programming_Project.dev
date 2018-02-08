@@ -33,20 +33,20 @@ UnitCount=4
 
 [VersionInfo]
 Major=1
-Minor=0
+Minor=2
 Release=0
-Build=39
+Build=25
 LanguageID=1033
 CharsetID=1252
 CompanyName=
-FileVersion=1.0.0.39
+FileVersion=1.2.0.25
 FileDescription=Programming_Project
 InternalName=
 LegalCopyright=
 LegalTrademarks=
 OriginalFilename=
 ProductName=
-ProductVersion=1.0.0.39
+ProductVersion=1.2.0.25
 AutoIncBuildNr=1
 SyncProduct=1
 
