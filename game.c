@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
+void game_time();
 void greeting();
 void course();
 void chat();
@@ -9,11 +10,14 @@ void status();
 void option();
 void value_setting();
 
+
 int extern user_id;
 char playername[20];
 
 void game_main(){
 	pause(2);
+	
+	game_time();
 	puts("選課(1)");
 	puts("聊天(2)");
 	puts("活動(3)");
@@ -46,10 +50,68 @@ void game_main(){
 	
 }
 
+void game_time(){
+	int day_now;
+	int id_check;
+	int code_check;
+	char day[3];
+	FILE *fdate;
+	FILE *fday;
+	fdate = fopen("data/save/date.txt", "r");
+	fday = fopen("data/text/day.txt", "r");
+	
+	rewind(fdate);
+	while(!feof(fdate)){
+		fscanf(fdate, "%d %d", &id_check, &day_now);
+		if(id_check == user_id){
+			break;
+		}
+	}
+	
+	int date = 1;
+	int month = 9;
+	int n, i;
+	
+	for(n = 0; n != day_now; n++){
+		
+		date++;
+		if(date == 31){
+			if(month == 9 || month == 11){
+				month++;
+				date = 1;
+			}
+		}
+		if(date == 32){
+			if(month == 10){
+				month++;
+				date = 1;
+			}
+		    if(month == 12){
+		    	month = 1;
+		    	date = 1;
+			}
+		}
+		if(month == 1 && date == 26){
+		    printf("Time's up !\n");
+		    break;
+		}
+	}
+	i = (day_now % 7) + 1;
+		
+		rewind(fday);
+		while(!feof(fday)){
+			fscanf(fday, "%d %s", &code_check, day);
+			if(code_check == i){
+				break;
+			}
+		}
+	printf("今天是%2d月%2d日(%s)\n", month, date, day);
+}
+
 void value_setting(){
+	int id_check;
 	FILE *fplayername;
 	fplayername = fopen("data/profile/playername.txt", "r");
-	int id_check;
 	
 	rewind(fplayername);
 	while(!feof(fplayername)){
@@ -58,7 +120,6 @@ void value_setting(){
 			break;
 		}
 	}
-	
 }
 
 void course(){
@@ -73,7 +134,7 @@ void chat(){
 	FILE *fchat;
 	fchat = fopen("data/text/chat.txt", "r");
 	int code_check;
-	int code = (rand() % 1) + 1;
+	int code = (rand() % 3) + 1;
 	int definition = 0;
 	
 	while(!feof(fchat)){
@@ -90,8 +151,7 @@ void chat(){
 		if(definition == 1 && code_check != code)
 			break;
 	}
-	
-	
+
 	game_main();
 }
 
@@ -131,6 +191,7 @@ void log_out();
 
 void option(){
 	puts("登出(1)");
+	puts("版本資訊(2)");
 	puts("返回(-1)");
 	
 	int selection;
@@ -139,6 +200,9 @@ void option(){
 		switch(selection){
 			case 1:
 				log_out();
+				break;
+			case 2:
+				version();
 				break;
 			case -1:
 				game_main();
