@@ -18,8 +18,8 @@ ExeOutput=
 ObjectOutput=
 LogOutput=
 LogOutputEnabled=0
-OverrideOutput=0
-OverrideOutputName=Programming_Project.exe
+OverrideOutput=1
+OverrideOutputName=學霸養成計畫.exe
 HostApplication=
 UseCustomMakefile=0
 CustomMakefile=
@@ -29,24 +29,24 @@ IncludeVersionInfo=1
 SupportXPThemes=0
 CompilerSet=0
 CompilerSettings=0000000000000000000000000
-UnitCount=4
+UnitCount=5
 
 [VersionInfo]
 Major=1
 Minor=2
 Release=0
-Build=25
+Build=56
 LanguageID=1033
 CharsetID=1252
 CompanyName=
-FileVersion=1.2.0.25
+FileVersion=1.2.0.56
 FileDescription=Programming_Project
 InternalName=
 LegalCopyright=
 LegalTrademarks=
 OriginalFilename=
 ProductName=
-ProductVersion=1.2.0.25
+ProductVersion=1.2.0.56
 AutoIncBuildNr=1
 SyncProduct=1
 
@@ -82,6 +82,16 @@ BuildCmd=
 
 [Unit4]
 FileName=initialization.c
+CompileCpp=0
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit5]
+FileName=archive.c
 CompileCpp=0
 Folder=
 Compile=1
