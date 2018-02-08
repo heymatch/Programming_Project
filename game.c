@@ -7,7 +7,7 @@ void status();
 void option();
 
 void game_main(){
-	system("cls");
+	pause(2);
 	puts("選課(1)");
 	puts("聊天(2)");
 	puts("活動(3)");
@@ -38,6 +38,8 @@ void game_main(){
 	
 }
 
+
+
 void log_out();
 
 void option(){
@@ -61,5 +63,5 @@ void option(){
 void log_out(){
 	puts("已成功登出!");
 	pause(2);
-	registration_main();
+	main();
 }
