@@ -2,13 +2,18 @@
 #include <windows.h>
 #include <string.h>
 
-int extern user_id;
+void playername_initialization();
+void protagonist_initialization();
+void date_initialization();
+void course_definition_initialization();
+void information_initializtion();
+
+int extern const user_id;
 
 void initial_setting(){
 	pause(2);
 	
 	FILE *finitialize_verify;
-	
 	finitialize_verify = fopen("data/profile/initialization.txt", "r");
 	
 	int verify;
@@ -18,17 +23,12 @@ void initial_setting(){
 	while(!feof(finitialize_verify)){
 		fscanf(finitialize_verify, "%d %d", &id_check, &verify);
 		if(verify == 0 && id_check == user_id){
-			FILE *fplayername;
-			fplayername = fopen("data/profile/playername.txt", "a");
-		
-			char playername[20];
-		
-			puts("請輸入你/妳的名字");
-			scanf("%s", playername);
-			fprintf(fplayername, "\n%d %s", user_id, playername);
-		
-			puts("基本資料設定完成");
-			
+			//建立玩家輸入資料
+			playername_initialization();
+			//建立初始設定
+			date_initialization();
+			course_definition_initialization();
+			//建立新驗證碼 
 			FILE *ftemp;
 			ftemp = fopen("data/profile/temp.txt", "w");
 			rewind(finitialize_verify);
@@ -43,7 +43,7 @@ void initial_setting(){
 				}
 			}
 			fclose(ftemp);
-			
+			 
 			finitialize_verify = fopen("data/profile/initialization.txt", "w");
 			ftemp = fopen("data/profile/temp.txt", "r");
 			rewind(finitialize_verify);
@@ -55,12 +55,44 @@ void initial_setting(){
 						fprintf(finitialize_verify, "\n");
 				}
 			
-			fclose(fplayername);
+			puts("基本資料設定完成");
+			
 			fclose(finitialize_verify);
-			remove("data/profile/temp.txt");
 		}
 		if(definition == 1)
 			break;
 	}
 	
 }
+
+void playername_initialization(){
+	FILE *fplayername;
+	fplayername = fopen("data/profile/playername.txt", "a");
+	char playername[20];
+	
+	puts("請輸入你/妳的名字");
+	scanf("%s", playername);
+	fprintf(fplayername, "\n%d %s", user_id, playername);
+	
+	fclose(fplayername);
+}
+
+void date_initialization(){
+	FILE *fdate;
+	fdate = fopen("data/save/date.txt", "a");
+	
+	fprintf(fdate, "\n%d %d", user_id, 0);
+	
+	fclose(fdate);
+}
+
+void course_definition_initialization(){
+	FILE *fcourse_definition;
+	fcourse_definition = fopen("data/save/course_definition.txt", "a");
+	
+	fprintf(fcourse_definition, "\n%d %d", user_id, 1);
+	
+	fclose(fcourse_definition);
+}
+
+
