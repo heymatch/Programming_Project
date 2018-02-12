@@ -7,6 +7,8 @@ void game_over();
 
 int user_id;
 
+int first_log_in_definition;
+
 void registration_main(){
 	int selection;
 	int verify;
@@ -53,6 +55,7 @@ int log_in(){
 	}
 	else if(check_user(username, "username") == check_user(password, "password")){
 		puts("Succeed!");
+		first_log_in_definition = 1;
 		return 1;
 	}
 }

@@ -21,17 +21,6 @@ void pause(int n){
 }
 
 void version(){
-	puts("版本：1.2_beta");
-	puts("更新日：2/8");
-	puts("返回(-1)");
-	
-	int selection;
-	while(selection != -1){
-		scanf("%d", &selection);
-		switch(selection){
-			case -1:
-				game_main();
-				break;
-		}
-	}
+	puts("版本：1.0.3_beta");
+	puts("更新日：2/12");
 }
