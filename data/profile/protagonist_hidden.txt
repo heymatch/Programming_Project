@@ -1,1 +1,3 @@
 whenthesunappearingfromfog
+
+const

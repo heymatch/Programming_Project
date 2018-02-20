@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <windows.h>
 
 void game_load();
 void game_save();
@@ -48,15 +49,16 @@ char extern playername[20];
 char extern protagonistname[20];
 
 void game_main(){
-	if(first_log_in_definition == 1){
-		game_load();
-		first_log_in_definition = 0;
-	}
 	if(first_sign_in_definition == 1){
 		protagonist_start(protagonist_selection);
+		first_sign_in_definition = 0;
+	}
+	if(first_log_in_definition == 1){
+		game_load();
 		greeting();
 		first_log_in_definition = 0;
 	}
+	
 	if(game_time(3) == 1){
 		;
 		main();
