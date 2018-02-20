@@ -4,6 +4,8 @@
 #include <windows.h>
 
 void version();
+void pause(int n);
+void system_message(int code);
 
 void main() {
 	srand(time(NULL));
@@ -21,6 +23,28 @@ void pause(int n){
 }
 
 void version(){
-	puts("版本：1.0.3_beta");
-	puts("更新日：2/12");
+	puts("版本：1.0.4_beta");
+	puts("更新日：2/20");
 }
+
+void system_message(int code){
+	FILE *fsystem_message;
+	fsystem_message = fopen("data/text/system_message.txt", "r");
+	int code_check;
+	char text[50];
+	int definition = 0;
+	
+	rewind(fsystem_message);
+	while(!feof(fsystem_message)){
+		fscanf(fsystem_message, "%d %s", &code_check, text);
+		if(code_check == code){
+			printf("%s\n", text);
+			definition = 1;
+		}
+		if(definition == 1 && code_check != code)
+			break;
+	}
+	
+	fclose(fsystem_message);
+}
+

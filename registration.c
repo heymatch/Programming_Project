@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 int log_in();
 int sign_in();
@@ -8,6 +9,7 @@ void game_over();
 int user_id;
 
 int first_log_in_definition;
+int first_sign_in_definition;
 
 void registration_main(){
 	int selection;
