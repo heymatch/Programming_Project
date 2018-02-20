@@ -7,6 +7,7 @@ void protagonist_initialization();
 void player_birthday_initialization();
 
 void date_initialization();
+void time_initialization();
 void course_definition_initialization();
 void course_record_initialization();
 void information_initialization();
@@ -35,6 +36,7 @@ void initial_setting(){
 			player_birthday_initialization();
 			//建立初始設定
 			date_initialization();
+			time_initialization();
 			course_definition_initialization();
 			course_record_initialization();
 			information_initialization();
@@ -157,6 +159,15 @@ void date_initialization(){
 	fclose(fdate);
 }
 
+void time_initialization(){
+	FILE *ftime;
+	ftime = fopen("data/save/time.txt", "a");
+	
+	fprintf(ftime, "\n%d %d", user_id, 1);
+	
+	fclose(ftime);
+}
+
 void course_definition_initialization(){
 	FILE *fcourse_definition;
 	fcourse_definition = fopen("data/save/course_definition.txt", "a");
@@ -191,7 +202,7 @@ void event_initialization(){
 	int i;
 	
 	for(i = 0; i <= 300; i++)
-		fprintf(fevent, "\n%d %d %d %d %d", user_id, protagonist_selection, i, 0);
+		fprintf(fevent, "\n%d %d %d %d", user_id, protagonist_selection, i, 0);
 			
 	fclose(fevent);
 }
