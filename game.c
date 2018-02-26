@@ -49,6 +49,7 @@ char extern playername[20];
 char extern protagonistname[20];
 
 void game_main(){
+	pause(2);
 	if(first_sign_in_definition == 1){
 		protagonist_start(protagonist_selection);
 		first_sign_in_definition = 0;
@@ -64,7 +65,7 @@ void game_main(){
 		main();
 	}
 	
-	pause(2);
+	
 	if(event_trigger(1, 0, 0, 0, 0, 1) == 1){
 		day_trigger(day_now+1);
 		pause(2);
@@ -388,7 +389,10 @@ void chat(){
 			else
 				printf("%s¡G", name);
 			for(i = 0; text[i] != '\0'; i++){
-				printf("%c", text[i]);
+				if(text[i] == '%')
+					printf("%s¡G", playername);
+				else
+					printf("%c", text[i]);
 				text[i] = '\0';
 				Sleep(75);
 			}
@@ -539,11 +543,11 @@ float talent_calculate(int talent, int record){
 	result = talent - record;
 	
 	if(result <= 0 && fortune == 1)
-		return (float)1 * 15 / 100;
+		return (float)1 * 65 / 100;
 	else if(result <= 0 && fortune == 0)
 		return 0;
 	else
-		return (float)((rand() % result) + 1) * 15 / 100;
+		return (float)((rand() % result) + 1) * 65 / 100;
 }
 
 

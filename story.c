@@ -84,7 +84,10 @@ void protagonist_start(int code){
 			else
 				printf("%s", name);
 			for(i = 0; text[i] != '\0'; i++){
-				printf("%c", text[i]);
+				if(text[i] == '%')
+					printf("%s¡G", playername);
+				else
+					printf("%c", text[i]);
 				text[i] = '\0';
 				Sleep(75);
 			}
@@ -119,7 +122,10 @@ void day_trigger(int code){
 			else
 				printf("%s¡G", name);
 			for(i = 0; text[i] != '\0'; i++){
-				printf("%c", text[i]);
+				if(text[i] == '%')
+					printf("%s¡G", playername);
+				else
+					printf("%c", text[i]);
 				text[i] = '\0';
 				Sleep(75);
 			}
