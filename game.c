@@ -6,7 +6,6 @@ void game_load();
 void game_save();
 
 int game_time(int code);
-int event_trigger(int date, int time, int place, int phrase, int action, int definition);
 
 void greeting();
 
@@ -22,7 +21,7 @@ float talent_calculate(int talent, int record);
 struct status{
 	int talent;
 	int record;
-	int phrase;
+	int phrase[6];
 	float add;
 	float now;
 };
@@ -61,10 +60,11 @@ void game_main(){
 	}
 	
 	if(game_time(3) == 1){
-		;
+		endding();
+		
+		game_save();
 		main();
 	}
-	
 	
 	if(event_trigger(1, 0, 0, 0, 0, 1) == 1){
 		day_trigger(day_now+1);
@@ -72,7 +72,8 @@ void game_main(){
 	}
 	
 	if(game_time(0) == 2 || game_time(0) == 3 || holiday_definition(day_now) == 1){
-		day_time = 2;
+		if(day_time == 1)
+			day_time = 2;
 		game_time(2);
 		puts("今天是假日");
 		puts("活動(1)"); 
@@ -200,14 +201,6 @@ int game_time(int code){ //遊戲時間
 		return end;
 	if(code == 0)
 		return i;
-}
-
-int event_trigger(int date, int time, int place, int phrase, int action, int triggered){
-	if(date == 1 && date_definition() == 1 && triggered == 1 && event_definition() == 1)
-		return 1;
-	else
-		return 0;
-	
 }
 
 void greeting(){
@@ -475,6 +468,7 @@ void next_day(int code){
 		puts("再見了~");
 	
 	day_now++;
+	day_time = 1;
 	course_definition = 1;
 	
 	game_main();

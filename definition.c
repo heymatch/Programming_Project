@@ -1,14 +1,26 @@
 #include <stdio.h>
 #include <string.h>
 
+int event_trigger(int date, int time, int place, int phrase, int action, int definition);
 int protagonist_hidden();
 int date_definition();
-int triggered_definition;
+int event_definition();
+int place_definition();
+int action_definition();
+int phrase_definition();
 
 int extern day_now;
 int extern user_id;
 int extern protagonist_selection;
 int extern event_code;
+
+int event_trigger(int date, int time, int place, int phrase, int action, int triggered){
+	if(date == 1 && date_definition() == 1 && triggered == 1 && event_definition() == 1)
+		return 1;
+	else
+		return 0;
+	
+}
 
 int protagonist_hidden(){
 	char text[30];
@@ -76,6 +88,8 @@ int event_definition(){
 	else
 		return 0;
 }
+
+
 
 int holiday_definition(int code){
 	if(code == 39 || code == 122)
