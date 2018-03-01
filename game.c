@@ -16,7 +16,7 @@ void information();
 void next_day(int code);
 void option();
 
-float talent_calculate(int talent, int record);
+float calculate(int talent, int record);
 
 struct status{
 	int talent;
@@ -57,18 +57,18 @@ void game_main(){
 		game_load();
 		greeting();
 		first_log_in_definition = 0;
+		pause(2);
 	}
 	
 	if(game_time(3) == 1){
-		endding();
-		
+		ending();
 		game_save();
 		main();
 	}
 	
 	if(event_trigger(1, 0, 0, 0, 0, 1) == 1){
 		day_trigger(day_now+1);
-		pause(2);
+		pause(1);
 	}
 	
 	if(game_time(0) == 2 || game_time(0) == 3 || holiday_definition(day_now) == 1){
@@ -270,7 +270,7 @@ void course(){
 	}
 	
 	if(course_selection == 1){
-		chinese.add = talent_calculate(chinese.talent, chinese.record);
+		chinese.add = calculate(chinese.talent, chinese.record);
 		chinese.now += chinese.add;
 		chinese.record++;
 		english.record = 0;
@@ -287,7 +287,7 @@ void course(){
 		}
 	}
 	else if(course_selection == 2){
-		english.add = talent_calculate(english.talent, english.record);
+		english.add = calculate(english.talent, english.record);
 		english.now += english.add;
 		chinese.record = 0;
 		english.record++;
@@ -304,7 +304,7 @@ void course(){
 		}
 	}
 	else if(course_selection == 3){
-		math.add = talent_calculate(math.talent, math.record);
+		math.add = calculate(math.talent, math.record);
 		math.now += math.add;
 		chinese.record = 0;
 		english.record = 0;
@@ -321,7 +321,7 @@ void course(){
 		}
 	}
 	else if(course_selection == 4){
-		social.add = talent_calculate(social.talent, social.record);
+		social.add = calculate(social.talent, social.record);
 		social.now += social.add;
 		chinese.record = 0;
 		english.record = 0;
@@ -338,7 +338,7 @@ void course(){
 		}
 	}
 	else if(course_selection == 5){
-		science.add = talent_calculate(science.talent, science.record);
+		science.add = calculate(science.talent, science.record);
 		science.now += science.add;
 		chinese.record = 0;
 		english.record = 0;
@@ -530,7 +530,7 @@ void log_out(){
 	main();
 }
 
-float talent_calculate(int talent, int record){
+float calculate(int talent, int record){
 	int result;
 	int fortune = rand() % 2;
 	

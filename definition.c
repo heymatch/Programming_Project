@@ -4,10 +4,14 @@
 int event_trigger(int date, int time, int place, int phrase, int action, int definition);
 int protagonist_hidden();
 int date_definition();
-int event_definition();
+int time_definition();
 int place_definition();
 int action_definition();
 int phrase_definition();
+int event_definition();
+
+int holiday_definition();
+int birthday_definition();
 
 int extern day_now;
 int extern user_id;

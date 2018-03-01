@@ -2,7 +2,6 @@
 #include <string.h>
 #include <windows.h>
 
-void background();
 void nothing_trigger();
 
 void protagonist_introduction(int code);
@@ -12,6 +11,7 @@ void protagonist_event(int code);
 void day_trigger(int code);
 void phrase_trigger(int code);
 void place_trigger(int code);
+void ending_trigger(int code);
 
 int protagonist_hidden();
 
@@ -81,11 +81,15 @@ void protagonist_start(int code){
 				printf("%s", playername);
 			else if(name[0] == '*')
 				;
+			else if(name[0] == '/')
+				;	
 			else
 				printf("%s", name);
 			for(i = 0; text[i] != '\0'; i++){
 				if(text[i] == '%')
 					printf("%s¡G", playername);
+				else if(text[i] == '/')
+					Sleep(75);
 				else
 					printf("%c", text[i]);
 				text[i] = '\0';
@@ -119,11 +123,15 @@ void day_trigger(int code){
 				printf("%s¡G", playername);
 			else if(name[0] == '*')
 				;
+			else if(name[0] == '/')
+				;
 			else
 				printf("%s¡G", name);
 			for(i = 0; text[i] != '\0'; i++){
 				if(text[i] == '%')
 					printf("%s¡G", playername);
+				else if(text[i] == '/')
+					Sleep(75);
 				else
 					printf("%c", text[i]);
 				text[i] = '\0';

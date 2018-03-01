@@ -2,6 +2,9 @@
 #include <windows.h>
 #include <string.h>
 
+void instruction();
+void background();
+
 void playername_initialization();
 void protagonist_initialization();
 void player_birthday_initialization();
@@ -14,6 +17,7 @@ void information_initialization();
 void event_initialization();
 
 int extern const user_id;
+int extern const textlong;
 int extern protagonist_selection;
 int extern first_sign_in_definition;
 
@@ -30,6 +34,10 @@ void initial_setting(){
 	while(!feof(finitialize_verify)){
 		fscanf(finitialize_verify, "%d %d", &id_check, &verify);
 		if(verify == 0 && id_check == user_id){
+			background();
+			pause(2);
+			instruction();
+			pause(2);
 			//建立玩家輸入資料
 			playername_initialization();
 			protagonist_initialization();
@@ -79,6 +87,52 @@ void initial_setting(){
 	
 }
 
+void background(){
+	char text[textlong];
+	
+	FILE *fbackground;
+	fbackground = fopen("data/text/background.txt", "r");
+	int i;
+	
+	while(!feof(fbackground)){
+		fscanf(fbackground, "%s", text);
+		for(i = 0; text[i] != '\0'; i++){
+			if(text[i] == '/')
+				Sleep(75);
+			else
+				printf("%c", text[i]);
+			text[i] = '\0';
+			Sleep(75);
+		}
+		printf("\n");
+	}
+	system("pause");
+	fclose(fbackground);
+}
+
+void instruction(){
+	char text[textlong];
+	
+	FILE *finstruction;
+	finstruction = fopen("data/text/instruction.txt", "r");
+	int i;
+	
+	while(!feof(finstruction)){
+		fscanf(finstruction, "%s", text);
+		for(i = 0; text[i] != '\0'; i++){
+			if(text[i] == '/')
+				Sleep(75);
+			else
+				printf("%c", text[i]);
+			text[i] = '\0';
+			Sleep(75);
+		}
+		printf("\n");
+	}
+	system("pause");
+	fclose(finstruction);
+}
+
 void playername_initialization(){
 	FILE *fplayername;
 	fplayername = fopen("data/profile/playername.txt", "a");
@@ -96,11 +150,17 @@ void player_birthday_initialization(){
 	fplayer_birthday = fopen("data/profile/player_birthday.txt", "a");
 	int player_birthday_month;
 	int player_birthday_date;
+	int definition = 0;
 	
-	puts("請輸入你/妳的生日(輸入後無法更改)(mm/dd)");
-	scanf("%d/%d", &player_birthday_month, &player_birthday_date);
+	while(definition != 1){
+		puts("請輸入你/妳的生日(輸入後無法更改)(mm/dd)");
+		scanf("%d/%d", &player_birthday_month, &player_birthday_date);
+		puts("確定嗎？");
+		puts("是(1)");
+		puts("否(-1)");
+		scanf("%d", &definition);
+	}
 	fprintf(fplayer_birthday, "\n%d %d %d", user_id, player_birthday_month, player_birthday_date);
-	
 	fclose(fplayer_birthday);
 }
 

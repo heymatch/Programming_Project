@@ -24,7 +24,7 @@ void pause(int n){
 
 void version(){
 	puts("版本：1.0.5_beta");
-	puts("更新日：2/24");
+	puts("更新日：3/1");
 }
 
 void system_message(int code){
