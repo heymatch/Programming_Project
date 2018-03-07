@@ -9,7 +9,7 @@ void protagonist_name(int code);
 void protagonist_start(int code);
 void protagonist_event(int code);
 void day_trigger(int code);
-void phrase_trigger(int code);
+void phase_trigger(int code);
 void place_trigger(int code);
 void ending_trigger(int code);
 

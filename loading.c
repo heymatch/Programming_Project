@@ -21,7 +21,7 @@ int greeting_quantity_load(int code);
 struct status{
 	int talent;
 	int record;
-	int phrase[6];
+	int phase[6];
 	float add;
 	float now;
 };
