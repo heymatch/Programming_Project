@@ -8,8 +8,8 @@ void game_over();
 
 int user_id;
 
-int first_log_in_definition;
-int first_sign_in_definition;
+int first_log_in_definition = 0;
+int first_sign_in_definition = 0;
 
 void registration_main(){
 	int selection;
