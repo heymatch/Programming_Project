@@ -3,6 +3,7 @@
 void date_save();
 void time_save();
 void course_definition_save();
+void activity_definition_save();
 void information_save();
 void course_record_save();
 
@@ -152,6 +153,45 @@ void course_definition_save(){
 	
 	fclose(ftemp);
 	fclose(fcourse_definition);
+}
+
+void activity_definition_save(){
+	FILE *factivity_definition;
+	FILE *ftemp;
+	factivity_definition = fopen("data/save/activity_definition.txt", "r");
+	ftemp = fopen("data/save/temp.txt", "w");
+	int temp;
+	int id_check;
+	int extern activity_definition;
+	
+	rewind(factivity_definition);
+	rewind(ftemp);
+	while(!feof(factivity_definition)){
+		fscanf(factivity_definition, "%d %d", &id_check, &temp);
+		fprintf(ftemp, "%d %d", id_check, temp);
+		if(!feof(factivity_definition))
+			fprintf(ftemp, "\n");
+		if((id_check + 1) == user_id){
+			fprintf(ftemp, "%d %d", user_id, activity_definition);
+			fscanf(factivity_definition, "%d %d", &id_check, &temp);
+			if(!feof(factivity_definition))
+				fprintf(ftemp, "\n");	
+		}
+	}
+	fclose(ftemp);
+	factivity_definition = fopen("data/save/activity_definition.txt", "w");
+	ftemp = fopen("data/save/temp.txt", "r");
+	rewind(factivity_definition);
+	rewind(ftemp);
+	while(!feof(ftemp)){
+		fscanf(ftemp, "%d %d", &id_check, &temp);
+		fprintf(factivity_definition, "%d %d", id_check, temp);
+		if(!feof(ftemp))
+			fprintf(factivity_definition, "\n");
+	}
+	
+	fclose(ftemp);
+	fclose(factivity_definition);
 }
 
 void information_save(){

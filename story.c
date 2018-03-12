@@ -90,6 +90,8 @@ void protagonist_start(int code){
 					printf("%s¡G", playername);
 				else if(text[i] == '/')
 					Sleep(75);
+				else if(text[i] == '_')
+					printf(" ");
 				else
 					printf("%c", text[i]);
 				text[i] = '\0';
@@ -132,6 +134,8 @@ void day_trigger(int code){
 					printf("%s¡G", playername);
 				else if(text[i] == '/')
 					Sleep(75);
+				else if(text[i] == '_')
+					printf(" ");
 				else
 					printf("%c", text[i]);
 				text[i] = '\0';

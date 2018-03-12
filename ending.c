@@ -43,6 +43,8 @@ void thanks(int code){
 					printf("%s", playername);
 				else if(text[i] == '/')
 					Sleep(75);
+				else if(text[i] == '_')
+					printf(" ");
 				else
 					printf("%c", text[i]);
 				text[i] = '\0';
@@ -74,6 +76,8 @@ void staff(){
 				printf("%s", playername);
 			else if(text[i] == '/')
 				Sleep(75);
+			else if(text[i] == '_')
+				printf(" ");
 			else
 				printf("%c", text[i]);
 			text[i] = '\0';

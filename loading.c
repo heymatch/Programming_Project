@@ -4,6 +4,7 @@ void playername_load();
 void date_load();
 void time_load();
 void courase_definition_load();
+void activity_definition_load();
 void information_load();
 void protagonist_selection_load();
 void player_birthday_load();
@@ -38,6 +39,7 @@ char protagonistname[20];
 int day_now;
 int day_time;
 int course_definition;
+int activity_definition;
 int protagonist_selection;
 
 int extern user_id;
@@ -121,6 +123,22 @@ void courase_definition_load(){
 	}
 	
 	fclose(fcourse_definition);
+}
+
+void activity_definition_load(){
+	int id_check;
+	FILE *factivity_definition;
+	factivity_definition = fopen("data/save/activity_definition.txt", "r");
+	
+	rewind(factivity_definition);
+	while(!feof(factivity_definition)){
+		fscanf(factivity_definition, "%d %d", &id_check, &activity_definition);
+		if(id_check == user_id){
+			break;
+		}
+	}
+	
+	fclose(factivity_definition);
 }
 
 void information_load(){

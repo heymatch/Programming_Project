@@ -40,6 +40,7 @@ int extern first_sign_in_definition;
 int extern day_now;
 int extern day_time;
 int extern course_definition;
+int extern activity_definition;
 int extern const user_id;
 int extern const protagonist_selection;
 int extern const textlong;
@@ -384,6 +385,8 @@ void chat(){
 			for(i = 0; text[i] != '\0'; i++){
 				if(text[i] == '%')
 					printf("%s：", playername);
+				else if(text[i] == '_')
+					printf(" ");
 				else
 					printf("%c", text[i]);
 				text[i] = '\0';
@@ -403,61 +406,65 @@ void chat(){
 }
 
 void activity(int code){
-	if(code == 1){
-		puts("要做什麼？");
-		
-		puts("返回(-1)");
-		int selection;
-		while(selection != -1){
-			scanf("%d", &selection);
-			switch(selection){
-				case 1:
-					break;
-				case 2:
-					break;
-				case 3:
-					break;
-				case 4:
-					break;
+	if(activity_definition == 1){
+		if(code == 1){
+			puts("要做什麼？");
+			puts("(1)");
+			puts("返回(-1)");
+			int selection;
+			while(selection != -1){
+				scanf("%d", &selection);
+				switch(selection){
+					case 1:
+						activity_definition = 0;
+						break;
+					case 2:
+						break;
+					case 3:
+						break;
+					case 4:
+						break;
+				}
 			}
 		}
-	}
-	else if(code == 2 && day_time <= 4){
-		puts("要做什麼？(1)");
-		puts("要去哪裡？(2)");
-		puts("返回(-1)");
-		int selection_1;
-		int selection_2;
-		while(selection_1 != -1){
-			scanf("%d", &selection_1);
-			switch(selection_1){
-				case 1:
-					puts("(1)");
-					puts("返回(-1)");
-					scanf("%d", &selection_2);
-					switch(selection_2){
-						case 1:
-							day_time++;
-							break;
-					}
-					break;
-				case 2:
-					puts("(1)");
-					puts("返回(-1)");
-					scanf("%d", &selection_2);
-					switch(selection_2){
-						case 1:
-							day_time++;
-							break;
-					}
-					break;
+		else if(code == 2 && day_time <= 4){
+			puts("要做什麼？(1)");
+			puts("要去哪裡？(2)");
+			puts("返回(-1)");
+			int selection_1;
+			int selection_2;
+			while(selection_1 != -1){
+				scanf("%d", &selection_1);
+				switch(selection_1){
+					case 1:
+						puts("(1)");
+						puts("返回(-1)");
+						scanf("%d", &selection_2);
+						switch(selection_2){
+							case 1:
+								day_time++;
+								break;
+						}
+						break;
+					case 2:
+						puts("(1)");
+						puts("返回(-1)");
+						scanf("%d", &selection_2);
+						switch(selection_2){
+							case 1:
+								day_time++;
+								break;
+						}
+						break;
+				}
+				break;
 			}
-			break;
 		}
+		else if(code == 2 && day_time == 5)
+			puts("已經太晚了！");
 	}
-	else if(code == 2 && day_time == 5)
-		puts("已經太晚了！");
-	
+	else
+		puts("做點別的事吧！");
 	game_main();
 }
 
@@ -470,6 +477,7 @@ void next_day(int code){
 	day_now++;
 	day_time = 1;
 	course_definition = 1;
+	activity_definition = 1;
 	
 	game_main();
 }

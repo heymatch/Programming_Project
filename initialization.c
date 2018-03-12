@@ -12,6 +12,7 @@ void player_birthday_initialization();
 void date_initialization();
 void time_initialization();
 void course_definition_initialization();
+void activity_definition_initialization();
 void course_record_initialization();
 void information_initialization();
 void event_initialization();
@@ -46,6 +47,7 @@ void initial_setting(){
 			date_initialization();
 			time_initialization();
 			course_definition_initialization();
+			activity_definition_initialization();
 			course_record_initialization();
 			information_initialization();
 			event_initialization();
@@ -235,6 +237,15 @@ void course_definition_initialization(){
 	fprintf(fcourse_definition, "\n%d %d", user_id, 1);
 	
 	fclose(fcourse_definition);
+}
+
+void activity_definition_initialization(){
+	FILE *factivity_definition;
+	factivity_definition = fopen("data/save/activity_definition.txt", "a");
+	
+	fprintf(factivity_definition, "\n%d %d", user_id, 1);
+	
+	fclose(factivity_definition);
 }
 
 void information_initialization(){
