@@ -22,7 +22,7 @@ int greeting_quantity_load(int code);
 struct status{
 	int talent;
 	int record;
-	int phase[6];
+	int phase;
 	float add;
 	float now;
 };
@@ -43,6 +43,7 @@ int activity_definition;
 int protagonist_selection;
 
 int extern user_id;
+int extern protagonist_selection;
 
 void game_load(){
 	pause(2);
@@ -52,6 +53,7 @@ void game_load(){
 	date_load();
 	time_load();
 	courase_definition_load();
+	activity_definition_load();
 	information_load();
 	protagonist_selection_load();
 	course_record_load();
@@ -265,4 +267,52 @@ int greeting_quantity_load(int code){
 		return quantity;
 }
 
+int action_quantity_load(int code){
+	int code_check;
+	int action_check;
+	FILE *faction_quantity;
+	faction_quantity = fopen("data/text/action_quantity.txt", "r");
+	int quantity;
+	
+	rewind(faction_quantity);
+	while(!feof(faction_quantity)){
+		fscanf(faction_quantity, "%d %d %d", &code_check, &action_check, &quantity);
+		if(code_check == protagonist_selection && action_check == code){
+			break;
+		}
+		if(code_check == 0)
+			break;
+	}
+	
+	fclose(faction_quantity);
+	
+	if(quantity == 0)
+		return 1;
+	else
+		return quantity;
+}
 
+int place_quantity_load(int code){
+	int code_check;
+	int place_check;
+	FILE *fplace_quantity;
+	fplace_quantity = fopen("data/text/place_quantity.txt", "r");
+	int quantity;
+	
+	rewind(fplace_quantity);
+	while(!feof(fplace_quantity)){
+		fscanf(fplace_quantity, "%d %d %d", &code_check, &place_check, &quantity);
+		if(code_check == protagonist_selection && place_check == code){
+			break;
+		}
+		if(code_check == 0)
+			break;
+	}
+	
+	fclose(fplace_quantity);
+	
+	if(quantity == 0)
+		return 1;
+	else
+		return quantity;
+}

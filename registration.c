@@ -145,7 +145,7 @@ int check_user(char *checked, char *check){
 		while(!feof(fcheck_id)){
 			fscanf(fcheck_password, "%s", data_password);
 			fscanf(fcheck_id, "%d", &data_id);
-			if(strcmp(data_password, checked) == 0)
+			if(strcmp(data_password, checked) == 0 && user_id == data_id)
 				return data_id;
 		}
 		return 0;

@@ -31,6 +31,7 @@ void initial_setting(){
 	int verify;
 	int id_check;
 	int definition = 0;
+	int confirm = 0;
 	rewind(finitialize_verify);
 	while(!feof(finitialize_verify)){
 		fscanf(finitialize_verify, "%d %d", &id_check, &verify);
@@ -40,9 +41,16 @@ void initial_setting(){
 			instruction();
 			pause(2);
 			//建立玩家輸入資料
-			playername_initialization();
-			protagonist_initialization();
-			player_birthday_initialization();
+			while(confirm != 1){
+				pause(2);
+				playername_initialization();
+				protagonist_initialization();
+				player_birthday_initialization();
+				puts("確定嗎？");
+				puts("是(1)");
+				puts("否(-1)");
+				scanf("%d", &confirm);
+			}
 			//建立初始設定
 			date_initialization();
 			time_initialization();
@@ -152,16 +160,10 @@ void player_birthday_initialization(){
 	fplayer_birthday = fopen("data/profile/player_birthday.txt", "a");
 	int player_birthday_month;
 	int player_birthday_date;
-	int definition = 0;
+
+	puts("請輸入你/妳的生日(輸入後無法更改)(mm/dd)");
+	scanf("%d/%d", &player_birthday_month, &player_birthday_date);
 	
-	while(definition != 1){
-		puts("請輸入你/妳的生日(輸入後無法更改)(mm/dd)");
-		scanf("%d/%d", &player_birthday_month, &player_birthday_date);
-		puts("確定嗎？");
-		puts("是(1)");
-		puts("否(-1)");
-		scanf("%d", &definition);
-	}
 	fprintf(fplayer_birthday, "\n%d %d %d", user_id, player_birthday_month, player_birthday_date);
 	fclose(fplayer_birthday);
 }

@@ -10,7 +10,7 @@ void course_record_save();
 struct status{
 	int talent;
 	int record;
-	int phase[6];
+	int phase;
 	float add;
 	float now;
 };
@@ -32,6 +32,7 @@ void game_save(){
 	date_save();
 	time_save();
 	course_definition_save();
+	activity_definition_save();
 	information_save();
 	course_record_save();
 	
