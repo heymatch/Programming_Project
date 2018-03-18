@@ -4,6 +4,7 @@
 
 void game_load();
 void game_save();
+void phase_calculate();
 
 int game_time(int code);
 
@@ -21,7 +22,7 @@ float calculate(int talent, int record);
 struct status{
 	int talent;
 	int record;
-	int phase[6];
+	int phase;
 	float add;
 	float now;
 };
@@ -35,11 +36,15 @@ struct status extern favorability;
 
 int const status_max = 100;
 
+int activity_selection;
+
 int extern first_log_in_definition;
 int extern first_sign_in_definition;
 int extern day_now;
 int extern day_time;
+int extern event_code;
 int extern course_definition;
+int extern activity_definition;
 int extern const user_id;
 int extern const protagonist_selection;
 int extern const textlong;
@@ -66,12 +71,15 @@ void game_main(){
 		main();
 	}
 	
+	//事件觸發 
+	phase_calculate();
 	if(event_trigger(1, 0, 0, 0, 0, 1) == 1){
 		day_trigger(day_now+1);
+		addition_trigger(event_code);
 		pause(1);
 	}
 	
-	if(game_time(0) == 2 || game_time(0) == 3 || holiday_definition(day_now) == 1){
+	if((game_time(0) == 2 || game_time(0) == 3 || holiday_definition(day_now) == 1) && daytime_definition(day_now) == 0){
 		if(day_time == 1)
 			day_time = 2;
 		game_time(2);
@@ -201,6 +209,15 @@ int game_time(int code){ //遊戲時間
 		return end;
 	if(code == 0)
 		return i;
+}
+
+void phase_calculate(){ //階段計算 
+	chinese.phase = chinese.now / 20;
+	english.phase = english.now / 20;
+	math.phase = math.now / 20;
+	social.phase= social.now / 20;
+	science.phase = science.now / 20;
+	favorability.phase = favorability.now / 20;
 }
 
 void greeting(){
@@ -384,6 +401,8 @@ void chat(){
 			for(i = 0; text[i] != '\0'; i++){
 				if(text[i] == '%')
 					printf("%s：", playername);
+				else if(text[i] == '_')
+					printf(" ");
 				else
 					printf("%c", text[i]);
 				text[i] = '\0';
@@ -403,61 +422,74 @@ void chat(){
 }
 
 void activity(int code){
-	if(code == 1){
-		puts("要做什麼？");
-		
-		puts("返回(-1)");
-		int selection;
-		while(selection != -1){
-			scanf("%d", &selection);
-			switch(selection){
-				case 1:
-					break;
-				case 2:
-					break;
-				case 3:
-					break;
-				case 4:
-					break;
+	if(activity_definition == 1){
+		if(code == 1){
+			puts("要做什麼？");
+			action_list_1(protagonist_selection);
+			puts("返回(-1)");
+			int selection;
+			while(selection != -1){
+				scanf("%d", &selection);
+				if(selection != -1){
+					activity_selection = selection;
+					if(event_trigger(0, 0, 0, 0, 1, 1) == 1){
+						action_trigger(activity_selection);
+						addition_trigger(event_code);
+						pause(1);
+					}
+					action(selection);
+					day_time = 1;
+				}
+				break;
 			}
 		}
-	}
-	else if(code == 2 && day_time <= 4){
-		puts("要做什麼？(1)");
-		puts("要去哪裡？(2)");
-		puts("返回(-1)");
-		int selection_1;
-		int selection_2;
-		while(selection_1 != -1){
-			scanf("%d", &selection_1);
-			switch(selection_1){
-				case 1:
-					puts("(1)");
-					puts("返回(-1)");
-					scanf("%d", &selection_2);
-					switch(selection_2){
-						case 1:
-							day_time++;
-							break;
-					}
-					break;
-				case 2:
-					puts("(1)");
-					puts("返回(-1)");
-					scanf("%d", &selection_2);
-					switch(selection_2){
-						case 1:
-							day_time++;
-							break;
-					}
-					break;
+		else if(code == 2 && day_time <= 4){
+			puts("要做什麼？(1)");
+			puts("要去哪裡？(2)");
+			puts("返回(-1)");
+			int selection_1;
+			int selection_2;
+			while(selection_1 != -1){
+				scanf("%d", &selection_1);
+				switch(selection_1){
+					case 1:
+						action_list_2(protagonist_selection);
+						puts("返回(-1)");
+						scanf("%d", &selection_2);
+						if(selection_2 != -1){
+							activity_selection = selection_2;
+							if(event_trigger(0, 0, 0, 0, 1, 1) == 1){
+								action_trigger(activity_selection);
+								addition_trigger(event_code);
+								pause(1);
+							}	
+							action(selection_2);
+							activity_definition = 1;
+						}
+						break;
+					case 2:
+						place_list(protagonist_selection);
+						puts("返回(-1)");
+						scanf("%d", &selection_2);
+						if(selection_2 != -1){
+							activity_selection = selection_2;
+							if(event_trigger(0, 0, 1, 0, 0, 1) == 1){
+								place_trigger(activity_selection);
+								addition_trigger(event_code);
+								pause(1);
+							}	
+							place(selection_2);
+						}
+						break;
+				}
+				break;
 			}
-			break;
 		}
+		else if(code == 2 && day_time == 5)
+			puts("已經太晚了！");
 	}
-	else if(code == 2 && day_time == 5)
-		puts("已經太晚了！");
-	
+	else if(activity_definition == 0)
+		puts("做點別的事吧！");
 	game_main();
 }
 
@@ -470,6 +502,7 @@ void next_day(int code){
 	day_now++;
 	day_time = 1;
 	course_definition = 1;
+	activity_definition = 1;
 	
 	game_main();
 }

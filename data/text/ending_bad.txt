@@ -1,0 +1,4 @@
+5 * bad
+0 eof eof
+
+const

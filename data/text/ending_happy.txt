@@ -1,0 +1,4 @@
+5 * happy
+0 eof eof
+
+const
