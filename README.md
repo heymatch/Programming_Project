@@ -3,6 +3,7 @@ The students who want to know how important the cooperation is.
 
 * 作品名稱：學霸養成計畫
 * 主題：養成遊戲
+* 下載點：https://goo.gl/1JgNXM 
 * 功能表：
 1. 登入/註冊系統
 2. 選課系統
