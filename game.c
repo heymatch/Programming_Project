@@ -179,8 +179,8 @@ int game_time(int code){ //¹CÀ¸®É¶¡
 	int code_check;
 	FILE *fday;
 	FILE *ftime;
-	fday = fopen("data/text/day.txt", "r");
-	ftime = fopen("data/text/time.txt", "r");
+	fday = fopen("data/text/day_data.txt", "r");
+	ftime = fopen("data/text/time_data.txt", "r");
 	int i = (day_now % 7) + 1;
 	
 	rewind(fday);
@@ -437,6 +437,7 @@ void activity(int code){
 						addition_trigger(event_code);
 						pause(1);
 					}
+					else
 					action(selection);
 					day_time = 1;
 				}
@@ -462,7 +463,8 @@ void activity(int code){
 								action_trigger(activity_selection);
 								addition_trigger(event_code);
 								pause(1);
-							}	
+							}
+							else
 							action(selection_2);
 							activity_definition = 1;
 						}
@@ -477,7 +479,8 @@ void activity(int code){
 								place_trigger(activity_selection);
 								addition_trigger(event_code);
 								pause(1);
-							}	
+							}
+							else
 							place(selection_2);
 						}
 						break;

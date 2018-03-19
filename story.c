@@ -18,6 +18,8 @@ int const namelong = 20;
 int event_code;
 
 int extern protagonist_selection;
+int extern day_time;
+int extern activity_definition;
 
 char extern playername[20];
 
@@ -192,6 +194,10 @@ void action_trigger(int code){
 		if(code_check == 0 && protagonist_selection_check == 0)
 			break;
 	}
+	
+	day_time++;
+	activity_definition = 0;
+	
 	system("pause");
 	fclose(faction_trigger);
 }
@@ -238,6 +244,9 @@ void place_trigger(int code){
 		if(code_check == 0 && protagonist_selection_check == 0)
 			break;
 	}
+	
+	day_time++;
+	
 	system("pause");
 	fclose(fplace_trigger);
 }
