@@ -14,6 +14,8 @@ int ending_definition();
 int holiday_definition();
 int birthday_definition();
 
+void day_skip();
+
 int extern day_now;
 int extern day_time;
 int extern user_id;
@@ -37,31 +39,16 @@ struct status science;
 struct status favorability;
 
 int event_trigger(int date, int time, int place, int phase, int action, int triggered){
-	if(date == 1 && date_definition() == 1 && time == 1 && time_definition() == 1 && place == 1 && place_definition() == 1 && phase == 1 && phase_definition() == 1 && triggered == 1 && event_definition() == 1)
-		return 1;
-	else if(date == 1 && date_definition() == 1 && time == 1 && time_definition() == 1 && action == 1 && action_definition() == 1 && phase == 1 && phase_definition() == 1 && triggered == 1 && event_definition() == 1)
-		return 1;
-	else if(date == 1 && date_definition() == 1 && time == 1 && time_definition() == 1 && phase == 1 && phase_definition() == 1 && triggered == 1 && event_definition() == 1)
-		return 1;
-	else if(date == 1 && date_definition() == 1 && phase == 1 && phase_definition() == 1 && triggered == 1 && event_definition() == 1)
-		return 1;
-	else if(action == 1 && action_definition() == 1 && phase == 1 && phase_definition() == 1 && triggered == 1 && event_definition() == 1)
-		return 1;
-	else if(place == 1 && place_definition() == 1 && phase == 1 && phase_definition() == 1 && triggered == 1 && event_definition() == 1)
-		return 1;	
-	else if(date == 1 && date_definition() == 1 && triggered == 1 && event_definition() == 1)
-		return 1;
-	else if(time == 1 && time_definition() == 1 && triggered == 1 && event_definition() == 1)
-		return 1;
-	else if(place == 1 && place_definition() == 1 && triggered == 1 && event_definition() == 1)
-		return 1;
-	else if(phase == 1 && phase_definition() == 1 && triggered == 1 && event_definition() == 1)
-		return 1;
-	else if(action == 1 && action_definition() == 1 && triggered == 1 && event_definition() == 1)
-		return 1;
-	else
-		return 0;
-	
+	int a, b, c, d, e, f;
+	for(a = 0; a <= 1; a++)
+	for(b = 0; b <= 1; b++)
+	for(c = 0; c <= 1; c++)
+	for(d = 0; d <= 1; d++)
+	for(e = 0; e <= 1; e++)
+	for(f = 0; f <= 1; f++)
+		if(date == a && date_definition() == a && time == b && time_definition() == b && place == c && place_definition() == c && phase == d && phase_definition() == d && action == e && action_definition() == e && triggered == f && event_definition() == f)
+			return 1;
+	return 0;
 }
 
 int protagonist_hidden(){
@@ -250,10 +237,30 @@ int daytime_definition(int code){
 }
 
 int holiday_definition(int code){
-	if(code == 39 || code == 122)
+	if(code == 39 || code == 122 || code == 38 || code == 33)
 		return 1;
 	else
 		return 0;
 }
 
-
+void day_skip(){
+	FILE *fday_skip;
+	fday_skip = fopen("data/definition/day_skip.txt", "r");
+	
+	int code_check;
+	int protagonist_selection_check;
+	int definition;
+	
+	while(!feof(fday_skip)){
+		fscanf(fday_skip, "%d %d %d", &protagonist_selection_check, &code_check, &definition);
+			if(protagonist_selection_check == protagonist_selection && code_check == event_code && definition == 1)
+				break;
+			if(code_check == 0)
+				break;
+	}
+	
+	if(code_check == event_code && definition == 1)
+		day_now++;
+	else
+		return;
+}

@@ -5,6 +5,7 @@
 void game_load();
 void game_save();
 void phase_calculate();
+void log_out();
 
 int game_time(int code);
 
@@ -45,6 +46,7 @@ int extern day_time;
 int extern event_code;
 int extern course_definition;
 int extern activity_definition;
+int extern const player_birthday;
 int extern const user_id;
 int extern const protagonist_selection;
 int extern const textlong;
@@ -54,10 +56,12 @@ char extern protagonistname[20];
 
 void game_main(){
 	pause(2);
+	//首次註冊 
 	if(first_sign_in_definition == 1){
 		protagonist_start(protagonist_selection);
 		first_sign_in_definition = 0;
 	}
+	//首次登入 
 	if(first_log_in_definition == 1){
 		game_load();
 		greeting();
@@ -76,13 +80,8 @@ void game_main(){
 	if((game_time(0) == 2 || game_time(0) == 3 || holiday_definition(day_now) == 1) && daytime_definition(day_now) == 0){
 		if(day_time == 1)
 			day_time = 2;
-		//日期事件觸發
+		//日期、時間事件觸發
 		if(event_trigger(1, 1, 0, 1, 0, 1) == 1){
-			day_trigger(event_code);
-			addition_trigger(event_code);
-			pause(1);
-		}	
-		else if(event_trigger(1, 0, 0, 1, 0, 1) == 1){
 			day_trigger(event_code);
 			addition_trigger(event_code);
 			pause(1);
@@ -92,12 +91,23 @@ void game_main(){
 			addition_trigger(event_code);
 			pause(1);
 		}
+		else if(event_trigger(1, 0, 0, 1, 0, 1) == 1){
+			day_trigger(event_code);
+			addition_trigger(event_code);
+			pause(1);
+		}
+		else if(event_trigger(0, 1, 0, 1, 0, 1) == 1){
+			time_trigger(event_code);
+			addition_trigger(event_code);
+			pause(1);
+		}
 		else if(event_trigger(1, 0, 0, 0, 0, 1) == 1){
 			day_trigger(event_code);
 			addition_trigger(event_code);
 			pause(1);
 		}
-		
+		day_skip();
+		//假日功能表
 		game_time(2);
 		puts("今天是假日");
 		puts("活動(1)"); 
@@ -125,6 +135,34 @@ void game_main(){
 	}
 	else{
 		day_time = 1;
+		//日期、時間事件觸發
+		if(event_trigger(1, 1, 0, 1, 0, 1) == 1){
+			day_trigger(event_code);
+			addition_trigger(event_code);
+			pause(1);
+		}
+		else if(event_trigger(1, 1, 0, 0, 0, 1) == 1){
+			day_trigger(event_code);
+			addition_trigger(event_code);
+			pause(1);
+		}
+		else if(event_trigger(1, 0, 0, 1, 0, 1) == 1){
+			day_trigger(event_code);
+			addition_trigger(event_code);
+			pause(1);
+		}
+		else if(event_trigger(0, 1, 0, 1, 0, 1) == 1){
+			time_trigger(event_code);
+			addition_trigger(event_code);
+			pause(1);
+		}
+		else if(event_trigger(1, 0, 0, 0, 0, 1) == 1){
+			day_trigger(event_code);
+			addition_trigger(event_code);
+			pause(1);
+		}
+		//平日功能表
+		day_skip();
 		game_time(1);
 		puts("選課(1)");
 		puts("聊天(2)"); 
@@ -497,7 +535,7 @@ void activity(int code){
 								addition_trigger(event_code);
 								pause(1);
 							}
-							else if(event_trigger(0, 1, 0, 1, 1, 1) == 1){
+							else if(event_trigger(1, 1, 0, 0, 1, 1) == 1){
 								action_trigger(event_code);
 								addition_trigger(event_code);
 								pause(1);
@@ -507,7 +545,12 @@ void activity(int code){
 								addition_trigger(event_code);
 								pause(1);
 							}
-							else if(event_trigger(0, 0, 0, 1, 1, 1) == 1){
+							else if(event_trigger(0, 1, 0, 1, 1, 1) == 1){
+								action_trigger(event_code);
+								addition_trigger(event_code);
+								pause(1);
+							}
+							else if(event_trigger(1, 0, 0, 0, 1, 1) == 1){
 								action_trigger(event_code);
 								addition_trigger(event_code);
 								pause(1);
@@ -517,7 +560,7 @@ void activity(int code){
 								addition_trigger(event_code);
 								pause(1);
 							}
-							else if(event_trigger(1, 0, 0, 0, 1, 1) == 1){
+							else if(event_trigger(0, 0, 0, 1, 1, 1) == 1){
 								action_trigger(event_code);
 								addition_trigger(event_code);
 								pause(1);
@@ -544,7 +587,7 @@ void activity(int code){
 								addition_trigger(event_code);
 								pause(1);
 							}
-							else if(event_trigger(0, 1, 1, 1, 5, 1) == 1){
+							else if(event_trigger(1, 1, 1, 0, 0, 1) == 1){
 								place_trigger(event_code);
 								addition_trigger(event_code);
 								pause(1);
@@ -554,7 +597,12 @@ void activity(int code){
 								addition_trigger(event_code);
 								pause(1);
 							}
-							else if(event_trigger(0, 0, 1, 1, 0, 1) == 1){
+							else if(event_trigger(0, 1, 1, 1, 0, 1) == 1){
+								place_trigger(event_code);
+								addition_trigger(event_code);
+								pause(1);
+							}
+							else if(event_trigger(1, 0, 1, 0, 0, 1) == 1){
 								place_trigger(event_code);
 								addition_trigger(event_code);
 								pause(1);
@@ -564,7 +612,7 @@ void activity(int code){
 								addition_trigger(event_code);
 								pause(1);
 							}
-							else if(event_trigger(1, 0, 1, 0, 0, 1) == 1){
+							else if(event_trigger(0, 0, 1, 1, 0, 1) == 1){
 								place_trigger(event_code);
 								addition_trigger(event_code);
 								pause(1);
@@ -595,6 +643,11 @@ void next_day(int code){
 		;
 	else
 		puts("再見了~");
+		
+	if(day_now == player_birthday){
+		pause(2);
+		birthday_trigger();
+	}
 	
 	day_now++;
 	day_time = 1;
@@ -628,11 +681,10 @@ void information(){
 	}
 }
 
-void log_out();
-
 void option(){
 	puts("登出(1)");
-	puts("版本資訊(2)");
+	puts("儲存(2)");
+	puts("版本資訊(3)");
 	puts("返回(-1)");
 	
 	int selection;
@@ -643,6 +695,10 @@ void option(){
 				log_out();
 				break;
 			case 2:
+				game_save();
+				game_main();
+				break;
+			case 3:
 				version();
 				game_main();
 				break;
@@ -673,5 +729,3 @@ float calculate(int talent, int record){
 	else
 		return (float)((rand() % result) + 1) * 65 / 100;
 }
-
-
