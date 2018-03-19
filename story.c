@@ -214,7 +214,7 @@ void place_trigger(int code){
 	int i;
 	
 	while(!feof(fplace_trigger)){
-		fscanf(fplace_trigger, "%d %d %[^ ] %s", &protagonist_selection_check, &code_check, name, text);
+		fscanf(fplace_trigger, "%d %d %[^ ] %s", &protagonist_selection_check, &place_check, &code_check, name, text);
 		if(code_check == code && protagonist_selection_check == protagonist_selection){
 			if(name[0] == '%')
 				printf("%s¡G", playername);

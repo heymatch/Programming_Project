@@ -71,17 +71,33 @@ void game_main(){
 		main();
 	}
 	
-	//事件觸發 
-	phase_calculate();
-	if(event_trigger(1, 0, 0, 0, 0, 1) == 1){
-		day_trigger(day_now+1);
-		addition_trigger(event_code);
-		pause(1);
-	}
+	phase_calculate(); 
 	
 	if((game_time(0) == 2 || game_time(0) == 3 || holiday_definition(day_now) == 1) && daytime_definition(day_now) == 0){
 		if(day_time == 1)
 			day_time = 2;
+		//日期事件觸發
+		if(event_trigger(1, 1, 0, 1, 0, 1) == 1){
+			day_trigger(event_code);
+			addition_trigger(event_code);
+			pause(1);
+		}	
+		else if(event_trigger(1, 0, 0, 1, 0, 1) == 1){
+			day_trigger(event_code);
+			addition_trigger(event_code);
+			pause(1);
+		}
+		else if(event_trigger(1, 1, 0, 0, 0, 1) == 1){
+			day_trigger(event_code);
+			addition_trigger(event_code);
+			pause(1);
+		}
+		else if(event_trigger(1, 0, 0, 0, 0, 1) == 1){
+			day_trigger(event_code);
+			addition_trigger(event_code);
+			pause(1);
+		}
+		
 		game_time(2);
 		puts("今天是假日");
 		puts("活動(1)"); 
@@ -432,13 +448,29 @@ void activity(int code){
 				scanf("%d", &selection);
 				if(selection != -1){
 					activity_selection = selection;
-					if(event_trigger(0, 0, 0, 0, 1, 1) == 1){
-						action_trigger(activity_selection);
+					//動作事件觸發 
+					if(event_trigger(1, 0, 0, 1, 1, 1) == 1){
+						action_trigger(event_code);
+						addition_trigger(event_code);
+						pause(1);
+					}
+					else if(event_trigger(0, 0, 0, 1, 1, 1) == 1){
+						action_trigger(event_code);
+						addition_trigger(event_code);
+						pause(1);
+					}
+					else if(event_trigger(1, 0, 0, 0, 1, 1) == 1){
+						action_trigger(event_code);
+						addition_trigger(event_code);
+						pause(1);
+					}
+					else if(event_trigger(0, 0, 0, 0, 1, 1) == 1){
+						action_trigger(event_code);
 						addition_trigger(event_code);
 						pause(1);
 					}
 					else
-					action(selection);
+						action(selection);
 					day_time = 1;
 				}
 				break;
@@ -459,13 +491,44 @@ void activity(int code){
 						scanf("%d", &selection_2);
 						if(selection_2 != -1){
 							activity_selection = selection_2;
-							if(event_trigger(0, 0, 0, 0, 1, 1) == 1){
-								action_trigger(activity_selection);
+							//動作事件觸發 
+							if(event_trigger(1, 1, 0, 1, 1, 1) == 1){
+								action_trigger(event_code);
+								addition_trigger(event_code);
+								pause(1);
+							}
+							else if(event_trigger(0, 1, 0, 1, 1, 1) == 1){
+								action_trigger(event_code);
+								addition_trigger(event_code);
+								pause(1);
+							}
+							else if(event_trigger(1, 0, 0, 1, 1, 1) == 1){
+								action_trigger(event_code);
+								addition_trigger(event_code);
+								pause(1);
+							}
+							else if(event_trigger(0, 0, 0, 1, 1, 1) == 1){
+								action_trigger(event_code);
+								addition_trigger(event_code);
+								pause(1);
+							}
+							else if(event_trigger(0, 1, 0, 0, 1, 1) == 1){
+								action_trigger(event_code);
+								addition_trigger(event_code);
+								pause(1);
+							}
+							else if(event_trigger(1, 0, 0, 0, 1, 1) == 1){
+								action_trigger(event_code);
+								addition_trigger(event_code);
+								pause(1);
+							}
+							else if(event_trigger(0, 0, 0, 0, 1, 1) == 1){
+								action_trigger(event_code);
 								addition_trigger(event_code);
 								pause(1);
 							}
 							else
-							action(selection_2);
+								action(selection_2);
 							activity_definition = 1;
 						}
 						break;
@@ -475,13 +538,44 @@ void activity(int code){
 						scanf("%d", &selection_2);
 						if(selection_2 != -1){
 							activity_selection = selection_2;
-							if(event_trigger(0, 0, 1, 0, 0, 1) == 1){
-								place_trigger(activity_selection);
+							//地方事件觸發 
+							if(event_trigger(1, 1, 1, 1, 0, 1) == 1){
+								place_trigger(event_code);
+								addition_trigger(event_code);
+								pause(1);
+							}
+							else if(event_trigger(0, 1, 1, 1, 5, 1) == 1){
+								place_trigger(event_code);
+								addition_trigger(event_code);
+								pause(1);
+							}
+							else if(event_trigger(1, 0, 1, 1, 0, 1) == 1){
+								place_trigger(event_code);
+								addition_trigger(event_code);
+								pause(1);
+							}
+							else if(event_trigger(0, 0, 1, 1, 0, 1) == 1){
+								place_trigger(event_code);
+								addition_trigger(event_code);
+								pause(1);
+							}
+							else if(event_trigger(0, 1, 1, 0, 0, 1) == 1){
+								place_trigger(event_code);
+								addition_trigger(event_code);
+								pause(1);
+							}
+							else if(event_trigger(1, 0, 1, 0, 0, 1) == 1){
+								place_trigger(event_code);
+								addition_trigger(event_code);
+								pause(1);
+							}
+							else if(event_trigger(0, 0, 1, 0, 0, 1) == 1){
+								place_trigger(event_code);
 								addition_trigger(event_code);
 								pause(1);
 							}
 							else
-							place(selection_2);
+								place(selection_2);
 						}
 						break;
 				}

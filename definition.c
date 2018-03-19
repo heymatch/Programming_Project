@@ -37,8 +37,18 @@ struct status science;
 struct status favorability;
 
 int event_trigger(int date, int time, int place, int phase, int action, int triggered){
-	if(date == 1 && date_definition() == 1 && phase == 1 && phase_definition() == 1 && triggered == 1 && event_definition() == 1)
+	if(date == 1 && date_definition() == 1 && time == 1 && time_definition() == 1 && place == 1 && place_definition() == 1 && phase == 1 && phase_definition() == 1 && triggered == 1 && event_definition() == 1)
 		return 1;
+	else if(date == 1 && date_definition() == 1 && time == 1 && time_definition() == 1 && action == 1 && action_definition() == 1 && phase == 1 && phase_definition() == 1 && triggered == 1 && event_definition() == 1)
+		return 1;
+	else if(date == 1 && date_definition() == 1 && time == 1 && time_definition() == 1 && phase == 1 && phase_definition() == 1 && triggered == 1 && event_definition() == 1)
+		return 1;
+	else if(date == 1 && date_definition() == 1 && phase == 1 && phase_definition() == 1 && triggered == 1 && event_definition() == 1)
+		return 1;
+	else if(action == 1 && action_definition() == 1 && phase == 1 && phase_definition() == 1 && triggered == 1 && event_definition() == 1)
+		return 1;
+	else if(place == 1 && place_definition() == 1 && phase == 1 && phase_definition() == 1 && triggered == 1 && event_definition() == 1)
+		return 1;	
 	else if(date == 1 && date_definition() == 1 && triggered == 1 && event_definition() == 1)
 		return 1;
 	else if(time == 1 && time_definition() == 1 && triggered == 1 && event_definition() == 1)
