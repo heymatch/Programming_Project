@@ -18,7 +18,7 @@ int protagonist_hidden();
 int const textlong = 80;
 int const namelong = 20;
 
-int event_code;
+int event_code = -1;
 
 int extern protagonist_selection;
 int extern day_time;
