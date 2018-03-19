@@ -3,12 +3,12 @@
 
 int event_trigger(int date, int time, int place, int phase, int action, int definition);
 int protagonist_hidden();
-int date_definition();
-int time_definition();
-int place_definition();
-int action_definition();
-int phase_definition();
-int event_definition();
+int date_definition(int verify);
+int time_definition(int verify);
+int place_definition(int verify);
+int action_definition(int verify);
+int phase_definition(int verify);
+int event_definition(int verify);
 int ending_definition();
 
 int holiday_definition();
@@ -45,8 +45,8 @@ int event_trigger(int date, int time, int place, int phase, int action, int trig
 	for(c = 0; c <= 1; c++)
 	for(d = 0; d <= 1; d++)
 	for(e = 0; e <= 1; e++)
-	for(f = 0; f <= 1; f++)
-		if(date == a && date_definition() == a && time == b && time_definition() == b && place == c && place_definition() == c && phase == d && phase_definition() == d && action == e && action_definition() == e && triggered == f && event_definition() == f)
+	for(f = 1; f <= 1; f++)
+		if(date == a && date_definition(date) == a && time == b && time_definition(time) == b && place == c &&place_definition(place) == c && action == d &&action_definition(action) == d && phase == e && phase_definition(phase) == e && triggered == f && event_definition(triggered) == f)
 			return 1;
 	return 0;
 }
@@ -61,6 +61,8 @@ int protagonist_hidden(){
 	puts("Please enter the pass-code:");
 	scanf("%s", text);
 	
+	fclose(ftext_check);
+	
 	if(strcmp(text, text_check) == 0){
 		protagonist_introduction(5);
 		return 5;
@@ -71,7 +73,7 @@ int protagonist_hidden(){
 	}
 }
 
-int date_definition(){
+int date_definition(int verify){
 	FILE *fdate_definition;
 	fdate_definition = fopen("data/definition/date.txt", "r");
 	
@@ -86,15 +88,17 @@ int date_definition(){
 			if(code_check == 0)
 				break;
 	}
-	event_code = code_check;
+	fclose(fdate_definition);
 	
-	if(definition == day_now)
+	if(definition == day_now && verify == 1){
+		event_code = code_check;
 		return 1;
+	}
 	else
 		return 0;
 }
 
-int time_definition(){
+int time_definition(int verify){
 	FILE *ftime_definition;
 	ftime_definition = fopen("data/definition/time.txt", "r");
 	
@@ -109,15 +113,18 @@ int time_definition(){
 			if(code_check == 0)
 				break;
 	}
-	event_code = code_check;
 	
-	if(definition == day_time)
+	fclose(ftime_definition);
+	
+	if(definition == day_time && verify == 1){
+		event_code = code_check;
 		return 1;
+	}
 	else
 		return 0;
 }
 
-int place_definition(){
+int place_definition(int verify){
 	FILE *fplace_definition;
 	fplace_definition = fopen("data/definition/place.txt", "r");
 	
@@ -132,17 +139,20 @@ int place_definition(){
 			if(code_check == 0)
 				break;
 	}
-	event_code = code_check;
 	
-	if(definition == activity_selection)
+	fclose(fplace_definition);
+	
+	if(definition == activity_selection && verify == 1){
+		event_code = code_check;
 		return 1;
+	}
 	else
 		return 0;
 }
 
-int action_definition(){
+int action_definition(int verify){
 	FILE *faction_definition;
-	faction_definition = fopen("data/definition/date.txt", "r");
+	faction_definition = fopen("data/definition/action.txt", "r");
 	
 	int code_check;
 	int protagonist_selection_check;
@@ -155,15 +165,18 @@ int action_definition(){
 			if(code_check == 0)
 				break;
 	}
-	event_code = code_check;
 	
-	if(definition == activity_selection)
+	fclose(faction_definition);
+	
+	if(definition == activity_selection && verify == 1){
+		event_code = code_check;
 		return 1;
+	}
 	else
 		return 0;
 }
 
-int phase_definition(){
+int phase_definition(int verify){
 	FILE *fphase_definition;
 	fphase_definition = fopen("data/definition/phase.txt", "r");
 	
@@ -178,10 +191,13 @@ int phase_definition(){
 			if(code_check == 0)
 				break;
 	}
-	event_code = code_check;
 	
-	if(chinese.phase >= definition[0] && math.phase >= definition[1] && english.phase >= definition[2], social.phase >= definition[3], science.phase >= definition[4], favorability.phase >= definition[5])
+	fclose(fphase_definition);
+	
+	if(chinese.phase >= definition[0] && math.phase >= definition[1] && english.phase >= definition[2] && social.phase >= definition[3] && science.phase >= definition[4] && favorability.phase >= definition[5] && verify == 1 && code_check == event_code){
+		event_code = code_check;
 		return 1;
+	}
 	else
 		return 0;
 }
@@ -198,14 +214,15 @@ int ending_definition(){
 			if(protagonist_selection_check == protagonist_selection && chinese.phase >= definition[0] && math.phase >= definition[1] && english.phase >= definition[2], social.phase >= definition[3], science.phase >= definition[4], favorability.phase >= definition[5]);
 				break;
 	}
+	fclose(fending_definition);
 	
-	if(chinese.phase >= definition[0] && math.phase >= definition[1] && english.phase >= definition[2], social.phase >= definition[3], science.phase >= definition[4], favorability.phase >= definition[5])
+	if(chinese.phase >= definition[0] && math.phase >= definition[1] && english.phase >= definition[2] && social.phase >= definition[3] && science.phase >= definition[4] && favorability.phase >= definition[5])
 		return 1;
 	else
 		return 0;
 }
 
-int event_definition(){
+int event_definition(int verify){
 	FILE *fevent_definition;
 	fevent_definition = fopen("data/save/event.txt", "r");
 	
@@ -221,10 +238,13 @@ int event_definition(){
 			if(code_check == 0)
 				break;
 	}
-	event_save(event_code, 1);
 	
-	if(definition == 0)
+	fclose(fevent_definition);
+	
+	if(definition == 0 && verify == 1){
+		event_save(event_code, 1);
 		return 1;
+	}
 	else
 		return 0;
 }
@@ -258,6 +278,8 @@ void day_skip(){
 			if(code_check == 0)
 				break;
 	}
+	
+	fclose(fday_skip);
 	
 	if(code_check == event_code && definition == 1)
 		day_now++;

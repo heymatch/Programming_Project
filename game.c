@@ -37,7 +37,7 @@ struct status extern favorability;
 
 int const status_max = 100;
 
-int activity_selection;
+int activity_selection = -1;
 
 int extern first_log_in_definition;
 int extern first_sign_in_definition;
@@ -139,30 +139,35 @@ void game_main(){
 		if(event_trigger(1, 1, 0, 1, 0, 1) == 1){
 			day_trigger(event_code);
 			addition_trigger(event_code);
+			printf("1");
 			pause(1);
 		}
 		else if(event_trigger(1, 1, 0, 0, 0, 1) == 1){
 			day_trigger(event_code);
 			addition_trigger(event_code);
+			printf("2");
 			pause(1);
 		}
 		else if(event_trigger(1, 0, 0, 1, 0, 1) == 1){
 			day_trigger(event_code);
 			addition_trigger(event_code);
+			printf("3");
 			pause(1);
 		}
 		else if(event_trigger(0, 1, 0, 1, 0, 1) == 1){
 			time_trigger(event_code);
 			addition_trigger(event_code);
+			printf("4");
 			pause(1);
 		}
 		else if(event_trigger(1, 0, 0, 0, 0, 1) == 1){
 			day_trigger(event_code);
 			addition_trigger(event_code);
+			printf("5");
 			pause(1);
 		}
-		//平日功能表
 		day_skip();
+		//平日功能表
 		game_time(1);
 		puts("選課(1)");
 		puts("聊天(2)"); 
@@ -653,6 +658,7 @@ void next_day(int code){
 	day_time = 1;
 	course_definition = 1;
 	activity_definition = 1;
+	event_code = -1;
 	
 	game_main();
 }
