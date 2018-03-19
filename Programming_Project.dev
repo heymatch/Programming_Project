@@ -28,25 +28,25 @@ Folders=
 IncludeVersionInfo=1
 SupportXPThemes=0
 CompilerSet=0
-CompilerSettings=0000000000000000100000000
+CompilerSettings=0000000000000000101000000
 UnitCount=10
 
 [VersionInfo]
 Major=1
 Minor=0
 Release=5
-Build=55
+Build=66
 LanguageID=1028
 CharsetID=1252
 CompanyName=
-FileVersion=1.0.5.55
+FileVersion=1.0.5.66
 FileDescription=Programming_Project
 InternalName=
 LegalCopyright=
 LegalTrademarks=
 OriginalFilename=
 ProductName=
-ProductVersion=1.0.5.55
+ProductVersion=1.0.5.66
 AutoIncBuildNr=1
 SyncProduct=1
 

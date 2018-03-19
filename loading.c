@@ -38,6 +38,7 @@ char playername[20];
 char protagonistname[20];
 int day_now;
 int day_time;
+int player_birthday = -1;
 int course_definition;
 int activity_definition;
 int protagonist_selection;
@@ -189,6 +190,47 @@ void protagonist_selection_load(){
 	}
 	
 	fclose(fprotagonist_selection);
+}
+
+void player_birthday_load(){
+	int id_check;
+	int month, day;
+	FILE *fplayer_birthday;
+	fplayer_birthday = fopen("data/profile/player_birthday.txt", "r");
+	
+	rewind(fplayer_birthday);
+	while(!feof(fplayer_birthday)){
+		fscanf(fplayer_birthday, "%d %d %d", &id_check, &month, &day);
+		if(id_check == user_id){
+			break;
+		}
+	}
+	
+	int i = 9, j = 1, n = 0;
+		while(player_birthday != n){
+		if(i == month && j == day){
+			player_birthday = n;
+			break;
+		}
+		if(i == 9 && j == 31){
+			i++;
+			j = 1;
+		}
+		else if(i == 11 && j == 31){
+			i++;
+			j = 1;
+		}
+		else if(j == 32){
+			i++;
+			j = 1;
+		}
+		if(i == 13)
+			i = 1;
+		j++;
+		n++;
+	}
+	
+	fclose(fplayer_birthday);
 }
 
 void talent_load(int code){
