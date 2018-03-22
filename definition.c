@@ -31,12 +31,12 @@ struct status{
 	float now;
 };
 
-struct status chinese;
-struct status english;
-struct status math;
-struct status social;
-struct status science;
-struct status favorability;
+struct status extern chinese;
+struct status extern english;
+struct status extern math;
+struct status extern social;
+struct status extern science;
+struct status extern favorability;
 
 int event_trigger(int date, int time, int place, int phase, int action, int triggered){
 	int a, b, c, d, e, f;

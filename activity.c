@@ -7,6 +7,7 @@ void action(int selection);
 void place(int selection);
 void addition_trigger(int code);
 void addition_activity(int selection, int code);
+void extra_lesson();
 
 int extern event_code;
 int extern day_time;
@@ -14,6 +15,7 @@ int extern activity_definition;
 int extern protagonist_selection;
 int extern const textlong;
 int extern const namelong;
+int extern const status_max;
 char extern playername[20];
 char extern protagonistname[20];
 
@@ -25,12 +27,12 @@ struct status{
 	float now;
 };
 
-struct status chinese;
-struct status english;
-struct status math;
-struct status social;
-struct status science;
-struct status favorability;
+struct status extern chinese;
+struct status extern english;
+struct status extern math;
+struct status extern social;
+struct status extern science;
+struct status extern favorability;
 
 void action_list_1(int code){
 	FILE *faction_list;
@@ -228,7 +230,10 @@ void place(int selection){
 		if(code_check == 0 && protagonist_selection_check == 0)
 			break;
 	}
-	
+	if(selection == 1 && definition == 0){
+		extra_lesson();
+		day_time++;
+	}
 	addition_activity(selection, code);
 	if(code != 1 && definition == 1)
 		day_time++;
@@ -284,4 +289,129 @@ void addition_activity(int selection, int code){
 	social.now += definition[3];
 	science.now += definition[4];
 	favorability.now += definition[5];
+}
+
+void extra_lesson(){
+	puts("在圖書館加課！");
+	puts("要選擇什麼科目？");
+	puts("國文(1)");
+	puts("英文(2)");
+	puts("數學(3)");
+	puts("社會(4)");
+	puts("自然(5)");
+	puts("返回(-1)");
+	
+	int course_selection = 0;
+	int selection;
+	while(selection != -1){
+		scanf("%d", &selection);
+		switch(selection){
+			case 1:
+				course_selection = 1;
+				break;
+			case 2:
+				course_selection = 2;
+				break;
+			case 3:
+				course_selection = 3;
+				break;
+			case 4:
+				course_selection = 4;
+				break;
+			case 5:
+				course_selection = 5;
+				break;
+			case -1:
+				game_main();
+				break;
+		}
+		break;
+	}
+	
+	if(course_selection == 1){
+		chinese.add = calculate(chinese.talent, chinese.record);
+		chinese.now += chinese.add;
+		chinese.record++;
+		english.record = 0;
+		math.record = 0;
+		social.record = 0;
+		science.record = 0;
+		if(chinese.now > status_max){
+			chinese.add = status_max - chinese.now;
+			chinese.now = status_max;
+		}
+		printf("經過一番努力，增加了%.2f!\n", chinese.add);
+		if(chinese.add == 0 && chinese.now != status_max){
+			puts("大腦無法運作了，想休息>A<");
+		}
+	}
+	else if(course_selection == 2){
+		english.add = calculate(english.talent, english.record);
+		english.now += english.add;
+		chinese.record = 0;
+		english.record++;
+		math.record = 0;
+		social.record = 0;
+		science.record = 0;
+		if(english.now > status_max){
+			english.add = status_max - english.now;
+			english.now = status_max;
+		}
+		printf("經過一番努力，增加了%.2f!\n", english.add);
+		if(english.add == 0 && english.now != status_max){
+			puts("大腦無法運作了，想休息>A<");
+		}
+	}
+	else if(course_selection == 3){
+		math.add = calculate(math.talent, math.record);
+		math.now += math.add;
+		chinese.record = 0;
+		english.record = 0;
+		math.record++;
+		social.record = 0;
+		science.record = 0;
+		if(math.now > status_max){
+			math.add = status_max - math.now;
+			math.now = status_max;
+		}
+		printf("經過一番努力，增加了%.2f!\n", math.add);
+		if(math.add == 0 && math.now != status_max){
+			puts("大腦無法運作了，想休息>A<");
+		}
+	}
+	else if(course_selection == 4){
+		social.add = calculate(social.talent, social.record);
+		social.now += social.add;
+		chinese.record = 0;
+		english.record = 0;
+		math.record = 0;
+		social.record++;
+		science.record = 0;
+		if(social.now > status_max){
+			social.add = status_max - social.now;
+			social.now = status_max;
+		}
+		printf("經過一番努力，增加了%.2f!\n", social.add);
+		if(social.add == 0 && social.now != status_max){
+			puts("大腦無法運作了，想休息>A<");
+		}
+	}
+	else if(course_selection == 5){
+		science.add = calculate(science.talent, science.record);
+		science.now += science.add;
+		chinese.record = 0;
+		english.record = 0;
+		math.record = 0;
+		social.record = 0;
+		science.record++;
+		if(science.now > status_max){
+			science.add = status_max - science.now;
+			science.now = status_max;
+		}
+		printf("經過一番努力，增加了%.2f!\n", science.add);
+		if(science.add == 0 && science.now != status_max){
+			puts("大腦無法運作了，想休息>A<");
+		}
+	}
+	
 }
