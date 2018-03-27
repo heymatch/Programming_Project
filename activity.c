@@ -230,7 +230,7 @@ void place(int selection){
 		if(code_check == 0 && protagonist_selection_check == 0)
 			break;
 	}
-	if(selection == 1 && definition == 0){
+	if(selection == 1 && code == 1){
 		extra_lesson();
 		day_time++;
 	}
@@ -299,7 +299,6 @@ void extra_lesson(){
 	puts("數學(3)");
 	puts("社會(4)");
 	puts("自然(5)");
-	puts("返回(-1)");
 	
 	int course_selection = 0;
 	int selection;
