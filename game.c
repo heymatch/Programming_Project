@@ -513,7 +513,7 @@ void activity(int code){
 						pause(1);
 					}
 					else
-						action(selection);
+						action_1(selection);
 					day_time = 1;
 				}
 				break;
@@ -576,7 +576,7 @@ void activity(int code){
 								pause(1);
 							}
 							else
-								action(selection_2);
+								action_2(selection_2);
 							activity_definition = 1;
 						}
 						break;

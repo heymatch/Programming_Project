@@ -3,10 +3,13 @@
 void action_list_1(int code);
 void action_list_2(int code);
 void place_list(int code);
-void action(int selection);
+void action_1(int selection);
+void action_2(int selection);
 void place(int selection);
 void addition_trigger(int code);
-void addition_activity(int selection, int code);
+void addition_activity_1(int selection, int code);
+void addition_activity_2(int selection, int code);
+void addition_activity_3(int selection, int code);
 void extra_lesson();
 
 int extern event_code;
@@ -139,16 +142,16 @@ void place_list(int code){
 	fclose(fplace_data);
 }
 
-void action(int selection){
+void action_1(int selection){
 	char text[textlong];
 	char name[namelong];
 	
 	FILE *faction;
-	faction = fopen("data/text/action_normal.txt", "r");
+	faction = fopen("data/text/action_normal_1.txt", "r");
 	int code_check;
 	int selection_check;
 	int protagonist_selection_check;
-	int code = (rand() % action_quantity_load(selection)) + 1;
+	int code = (rand() % action_quantity_load_1(selection)) + 1;
 	int definition = 0;
 	int i;
 	
@@ -180,7 +183,58 @@ void action(int selection){
 			break;
 	}
 	
-	addition_activity(selection, code);
+	addition_activity_1(selection, code);
+	if(definition == 1){
+		day_time++;
+		activity_definition = 0;
+	}
+	
+	system("pause");
+	fclose(faction);
+}
+
+void action_2(int selection){
+	char text[textlong];
+	char name[namelong];
+	
+	FILE *faction;
+	faction = fopen("data/text/action_normal_2.txt", "r");
+	int code_check;
+	int selection_check;
+	int protagonist_selection_check;
+	int code = (rand() % action_quantity_load_2(selection)) + 1;
+	int definition = 0;
+	int i;
+	
+	while(!feof(faction)){
+		fscanf(faction, "%d %d %d %[^ ] %s", &protagonist_selection_check, &selection_check, &code_check, name, text);
+		if(code_check == code && protagonist_selection_check == protagonist_selection && selection_check == selection){
+			if(name[0] == '%')
+				printf("%s¡G", playername);
+			else if(name[0] == '*')
+				;
+			else
+				printf("%s¡G", name);
+			for(i = 0; text[i] != '\0'; i++){
+				if(text[i] == '%')
+					printf("%s¡G", playername);
+				else if(text[i] == '_')
+					printf(" ");
+				else
+					printf("%c", text[i]);
+				text[i] = '\0';
+				Sleep(75);
+			}
+			printf("\n");
+			definition = 1;
+		}
+		if(definition == 1 && code_check != code)
+			break;
+		if(code_check == 0 && protagonist_selection_check == 0)
+			break;
+	}
+	
+	addition_activity_2(selection, code);
 	if(definition == 1){
 		day_time++;
 		activity_definition = 0;
@@ -234,7 +288,7 @@ void place(int selection){
 		extra_lesson();
 		day_time++;
 	}
-	addition_activity(selection, code);
+	addition_activity_3(selection, code);
 	if(code != 1 && definition == 1)
 		day_time++;
 	
@@ -266,9 +320,59 @@ void addition_trigger(int code){
 	favorability.now += definition[5];
 }
 
-void addition_activity(int selection, int code){
+void addition_activity_1(int selection, int code){
 	FILE *faddition;
-	faddition = fopen("data/definition/addition_activity.txt", "r");
+	faddition = fopen("data/definition/addition_activity_1.txt", "r");
+	
+	int code_check;
+	int selection_check;
+	int protagonist_selection_check;
+	int definition[6];
+	
+	while(!feof(faddition)){
+		fscanf(faddition, "%d %d %d %d %d %d %d %d %d", &protagonist_selection_check, &selection_check, &code_check, &definition[0], &definition[1], &definition[2], &definition[3], &definition[4], &definition[5]);
+			if(protagonist_selection_check == protagonist_selection && code_check == code && selection_check == selection)
+				break;
+			if(code_check == 0)
+				break;
+	}
+	
+	chinese.now += definition[0];
+	english.now += definition[1];
+	math.now += definition[2];
+	social.now += definition[3];
+	science.now += definition[4];
+	favorability.now += definition[5];
+}
+
+void addition_activity_2(int selection, int code){
+	FILE *faddition;
+	faddition = fopen("data/definition/addition_activity_2.txt", "r");
+	
+	int code_check;
+	int selection_check;
+	int protagonist_selection_check;
+	int definition[6];
+	
+	while(!feof(faddition)){
+		fscanf(faddition, "%d %d %d %d %d %d %d %d %d", &protagonist_selection_check, &selection_check, &code_check, &definition[0], &definition[1], &definition[2], &definition[3], &definition[4], &definition[5]);
+			if(protagonist_selection_check == protagonist_selection && code_check == code && selection_check == selection)
+				break;
+			if(code_check == 0)
+				break;
+	}
+	
+	chinese.now += definition[0];
+	english.now += definition[1];
+	math.now += definition[2];
+	social.now += definition[3];
+	science.now += definition[4];
+	favorability.now += definition[5];
+}
+
+void addition_activity_3(int selection, int code){
+	FILE *faddition;
+	faddition = fopen("data/definition/addition_activity_3.txt", "r");
 	
 	int code_check;
 	int selection_check;
