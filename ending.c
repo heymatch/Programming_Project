@@ -54,7 +54,7 @@ void ending_happy(int code){
 					printf("%s", playername);
 				else if(text[i] == '/')
 					Sleep(75);
-				else if(text[i] == '_')
+				else if(text[i] == '-')
 					printf(" ");
 				else
 					printf("%c", text[i]);
@@ -98,7 +98,7 @@ void ending_bad(int code){
 					printf("%s", playername);
 				else if(text[i] == '/')
 					Sleep(75);
-				else if(text[i] == '_')
+				else if(text[i] == '-')
 					printf(" ");
 				else
 					printf("%c", text[i]);
@@ -141,7 +141,7 @@ void thanks(int code){
 					printf("%s", playername);
 				else if(text[i] == '/')
 					Sleep(75);
-				else if(text[i] == '_')
+				else if(text[i] == '-')
 					printf(" ");
 				else
 					printf("%c", text[i]);
@@ -174,7 +174,7 @@ void staff(){
 				printf("%s", playername);
 			else if(text[i] == '/')
 				Sleep(75);
-			else if(text[i] == '_')
+			else if(text[i] == '-')
 				printf(" ");
 			else
 				printf("%c", text[i]);

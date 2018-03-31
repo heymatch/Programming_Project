@@ -15,8 +15,8 @@ void birthday_trigger();
 
 int protagonist_hidden();
 
-int const textlong = 80;
-int const namelong = 20;
+int textlong = 80;
+int namelong = 20;
 
 int event_code = -1;
 
@@ -86,13 +86,13 @@ void protagonist_start(int code){
 			else if(name[0] == '/')
 				;	
 			else
-				printf("%s", name);
+				printf("%s¡G", name);
 			for(i = 0; text[i] != '\0'; i++){
 				if(text[i] == '%')
 					printf("%s", playername);
 				else if(text[i] == '/')
 					Sleep(75);
-				else if(text[i] == '_')
+				else if(text[i] == '-')
 					printf(" ");
 				else
 					printf("%c", text[i]);
@@ -136,7 +136,7 @@ void day_trigger(int code){
 					printf("%s", playername);
 				else if(text[i] == '/')
 					Sleep(75);
-				else if(text[i] == '_')
+				else if(text[i] == '-')
 					printf(" ");
 				else
 					printf("%c", text[i]);
@@ -182,7 +182,7 @@ void time_trigger(int code){
 					printf("%s", playername);
 				else if(text[i] == '/')
 					Sleep(75);
-				else if(text[i] == '_')
+				else if(text[i] == '-')
 					printf(" ");
 				else
 					printf("%c", text[i]);
@@ -228,7 +228,7 @@ void action_trigger(int code){
 					printf("%s", playername);
 				else if(text[i] == '/')
 					Sleep(75);
-				else if(text[i] == '_')
+				else if(text[i] == '-')
 					printf(" ");
 				else
 					printf("%c", text[i]);
@@ -278,7 +278,7 @@ void place_trigger(int code){
 					printf("%s", playername);
 				else if(text[i] == '/')
 					Sleep(75);
-				else if(text[i] == '_')
+				else if(text[i] == '-')
 					printf(" ");
 				else
 					printf("%c", text[i]);
@@ -327,7 +327,7 @@ void birthday_trigger(){
 					printf("%s", playername);
 				else if(text[i] == '/')
 					Sleep(75);
-				else if(text[i] == '_')
+				else if(text[i] == '-')
 					printf(" ");
 				else
 					printf("%c", text[i]);

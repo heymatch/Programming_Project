@@ -12,6 +12,8 @@ void addition_activity_2(int selection, int code);
 void addition_activity_3(int selection, int code);
 void extra_lesson();
 
+float calculate(int talent, int record);
+
 int extern event_code;
 int extern day_time;
 int extern activity_definition;
@@ -178,7 +180,7 @@ void action_1(int selection){
 			for(i = 0; text[i] != '\0'; i++){
 				if(text[i] == '%')
 					printf("%s", playername);
-				else if(text[i] == '_')
+				else if(text[i] == '-')
 					printf(" ");
 				else if(text[i] == '/')
 					Sleep(75);
@@ -233,7 +235,7 @@ void action_2(int selection){
 			for(i = 0; text[i] != '\0'; i++){
 				if(text[i] == '%')
 					printf("%s", playername);
-				else if(text[i] == '_')
+				else if(text[i] == '-')
 					printf(" ");
 				else if(text[i] == '/')
 					Sleep(75);
@@ -275,7 +277,7 @@ void place(int selection){
 	int i;
 	
 	while(!feof(fplace)){
-		fscanf(fplace, "%d %d %d %[^ ] %s", &protagonist_selection_check, &selection, &code_check, name, text);
+		fscanf(fplace, "%d %d %d %[^ ] %s", &protagonist_selection_check, &selection_check, &code_check, name, text);
 		if(code_check == code && protagonist_selection_check == protagonist_selection && selection_check == selection){
 			if(name[0] == '%')
 				printf("%s：", playername);
@@ -288,7 +290,7 @@ void place(int selection){
 			for(i = 0; text[i] != '\0'; i++){
 				if(text[i] == '%')
 					printf("%s", playername);
-				else if(text[i] == '_')
+				else if(text[i] == '-')
 					printf(" ");
 				else if(text[i] == '/')
 					Sleep(75);
@@ -300,14 +302,15 @@ void place(int selection){
 			printf("\n");
 			definition = 1;
 		}
-		if(definition == 1 && code_check != code)
+		if(definition == 1 && code_check != code){
+			day_time++;
 			break;
+		}
 		if(code_check == 0 && protagonist_selection_check == 0)
 			break;
 	}
 	if(selection == 1 && code == 1){
 		extra_lesson();
-		day_time++;
 	}
 	addition_activity_3(selection, code);
 	
@@ -462,6 +465,8 @@ void extra_lesson(){
 			chinese.add = status_max - chinese.now;
 			chinese.now = status_max;
 		}
+		if(chinese.add < 0)
+			chinese.add = 0;
 		printf("經過一番努力，增加了%.2f!\n", chinese.add);
 		if(chinese.add == 0 && chinese.now != status_max){
 			puts("大腦無法運作了，想休息>A<");
@@ -479,6 +484,8 @@ void extra_lesson(){
 			english.add = status_max - english.now;
 			english.now = status_max;
 		}
+		if(english.add < 0)
+			english.add = 0;
 		printf("經過一番努力，增加了%.2f!\n", english.add);
 		if(english.add == 0 && english.now != status_max){
 			puts("大腦無法運作了，想休息>A<");
@@ -496,6 +503,8 @@ void extra_lesson(){
 			math.add = status_max - math.now;
 			math.now = status_max;
 		}
+		if(math.add < 0)
+			math.add = 0;
 		printf("經過一番努力，增加了%.2f!\n", math.add);
 		if(math.add == 0 && math.now != status_max){
 			puts("大腦無法運作了，想休息>A<");
@@ -513,6 +522,8 @@ void extra_lesson(){
 			social.add = status_max - social.now;
 			social.now = status_max;
 		}
+		if(social.add < 0)
+			social.add = 0;
 		printf("經過一番努力，增加了%.2f!\n", social.add);
 		if(social.add == 0 && social.now != status_max){
 			puts("大腦無法運作了，想休息>A<");
@@ -530,6 +541,8 @@ void extra_lesson(){
 			science.add = status_max - science.now;
 			science.now = status_max;
 		}
+		if(science.add < 0)
+			science.add = 0;
 		printf("經過一番努力，增加了%.2f!\n", science.add);
 		if(science.add == 0 && science.now != status_max){
 			puts("大腦無法運作了，想休息>A<");

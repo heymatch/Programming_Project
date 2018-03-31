@@ -35,8 +35,7 @@ struct status extern social;
 struct status extern science;
 struct status extern favorability;
 
-int const status_max = 100;
-
+int status_max = 100;
 int activity_selection = -1;
 
 int extern first_log_in_definition;
@@ -354,6 +353,8 @@ void course(){
 			chinese.add = status_max - chinese.now;
 			chinese.now = status_max;
 		}
+		if(chinese.add < 0)
+			chinese.add = 0;
 		printf("經過一番努力，增加了%.2f!\n", chinese.add);
 		if(chinese.add == 0 && chinese.now != status_max){
 			puts("大腦無法運作了，想休息>A<");
@@ -371,6 +372,8 @@ void course(){
 			english.add = status_max - english.now;
 			english.now = status_max;
 		}
+		if(english.add < 0)
+			english.add = 0;
 		printf("經過一番努力，增加了%.2f!\n", english.add);
 		if(english.add == 0 && english.now != status_max){
 			puts("大腦無法運作了，想休息>A<");
@@ -388,6 +391,8 @@ void course(){
 			math.add = status_max - math.now;
 			math.now = status_max;
 		}
+		if(math.add < 0)
+			math.add = 0;
 		printf("經過一番努力，增加了%.2f!\n", math.add);
 		if(math.add == 0 && math.now != status_max){
 			puts("大腦無法運作了，想休息>A<");
@@ -405,6 +410,8 @@ void course(){
 			social.add = status_max - social.now;
 			social.now = status_max;
 		}
+		if(social.add < 0)
+			social.add = 0;
 		printf("經過一番努力，增加了%.2f!\n", social.add);
 		if(social.add == 0 && social.now != status_max){
 			puts("大腦無法運作了，想休息>A<");
@@ -422,6 +429,8 @@ void course(){
 			science.add = status_max - science.now;
 			science.now = status_max;
 		}
+		if(science.add < 0)
+			science.add = 0;
 		printf("經過一番努力，增加了%.2f!\n", science.add);
 		if(science.add == 0 && science.now != status_max){
 			puts("大腦無法運作了，想休息>A<");
@@ -459,7 +468,7 @@ void chat(){
 			for(i = 0; text[i] != '\0'; i++){
 				if(text[i] == '%')
 					printf("%s", playername);
-				else if(text[i] == '_')
+				else if(text[i] == '-')
 					printf(" ");
 				else if(text[i] == '/')
 					Sleep(75);
@@ -717,7 +726,7 @@ void option(){
 }
 
 void log_out(){
-	puts("成功登出！");
+	puts("已成功登出！");
 	
 	game_save();
 	main();
