@@ -80,7 +80,7 @@ void protagonist_start(int code){
 		fscanf(fprotagonist_start, "%d %[^ ] %s", &code_check, name, text);
 		if(code_check == code){
 			if(name[0] == '%')
-				printf("%s", playername);
+				printf("%s¡G", playername);
 			else if(name[0] == '*')
 				;
 			else if(name[0] == '/')
@@ -89,7 +89,7 @@ void protagonist_start(int code){
 				printf("%s", name);
 			for(i = 0; text[i] != '\0'; i++){
 				if(text[i] == '%')
-					printf("%s¡G", playername);
+					printf("%s", playername);
 				else if(text[i] == '/')
 					Sleep(75);
 				else if(text[i] == '_')
@@ -133,7 +133,7 @@ void day_trigger(int code){
 				printf("%s¡G", name);
 			for(i = 0; text[i] != '\0'; i++){
 				if(text[i] == '%')
-					printf("%s¡G", playername);
+					printf("%s", playername);
 				else if(text[i] == '/')
 					Sleep(75);
 				else if(text[i] == '_')
@@ -179,7 +179,7 @@ void time_trigger(int code){
 				printf("%s¡G", name);
 			for(i = 0; text[i] != '\0'; i++){
 				if(text[i] == '%')
-					printf("%s¡G", playername);
+					printf("%s", playername);
 				else if(text[i] == '/')
 					Sleep(75);
 				else if(text[i] == '_')
@@ -225,7 +225,7 @@ void action_trigger(int code){
 				printf("%s¡G", name);
 			for(i = 0; text[i] != '\0'; i++){
 				if(text[i] == '%')
-					printf("%s¡G", playername);
+					printf("%s", playername);
 				else if(text[i] == '/')
 					Sleep(75);
 				else if(text[i] == '_')
@@ -275,7 +275,7 @@ void place_trigger(int code){
 				printf("%s¡G", name);
 			for(i = 0; text[i] != '\0'; i++){
 				if(text[i] == '%')
-					printf("%s¡G", playername);
+					printf("%s", playername);
 				else if(text[i] == '/')
 					Sleep(75);
 				else if(text[i] == '_')
@@ -312,7 +312,7 @@ void birthday_trigger(){
 	int i;
 	
 	while(!feof(fbirthday_trigger)){
-		fscanf(fbirthday_trigger, "%d %d %[^ ] %s", &protagonist_selection_check, name, text);
+		fscanf(fbirthday_trigger, "%d %[^ ] %s", &protagonist_selection_check, name, text);
 		if(protagonist_selection_check == protagonist_selection){
 			if(name[0] == '%')
 				printf("%s¡G", playername);
@@ -324,7 +324,7 @@ void birthday_trigger(){
 				printf("%s¡G", name);
 			for(i = 0; text[i] != '\0'; i++){
 				if(text[i] == '%')
-					printf("%s¡G", playername);
+					printf("%s", playername);
 				else if(text[i] == '/')
 					Sleep(75);
 				else if(text[i] == '_')

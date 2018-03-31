@@ -58,6 +58,8 @@ void game_main(){
 	pause(2);
 	//首次註冊 
 	if(first_sign_in_definition == 1){
+		game_load();
+		pause(1);
 		protagonist_start(protagonist_selection);
 		first_sign_in_definition = 0;
 	}
@@ -139,31 +141,26 @@ void game_main(){
 		if(event_trigger(1, 1, 0, 1, 0, 1) == 1){
 			day_trigger(event_code);
 			addition_trigger(event_code);
-			printf("1");
 			pause(1);
 		}
 		else if(event_trigger(1, 1, 0, 0, 0, 1) == 1){
 			day_trigger(event_code);
 			addition_trigger(event_code);
-			printf("2");
 			pause(1);
 		}
 		else if(event_trigger(1, 0, 0, 1, 0, 1) == 1){
 			day_trigger(event_code);
 			addition_trigger(event_code);
-			printf("3");
 			pause(1);
 		}
 		else if(event_trigger(0, 1, 0, 1, 0, 1) == 1){
 			time_trigger(event_code);
 			addition_trigger(event_code);
-			printf("4");
 			pause(1);
 		}
 		else if(event_trigger(1, 0, 0, 0, 0, 1) == 1){
 			day_trigger(event_code);
 			addition_trigger(event_code);
-			printf("5");
 			pause(1);
 		}
 		day_skip();
@@ -455,13 +452,17 @@ void chat(){
 				printf("%s：", playername);
 			else if(name[0] == '*')
 				;
+			else if(name[0] == '/')
+				;
 			else
 				printf("%s：", name);
 			for(i = 0; text[i] != '\0'; i++){
 				if(text[i] == '%')
-					printf("%s：", playername);
+					printf("%s", playername);
 				else if(text[i] == '_')
 					printf(" ");
+				else if(text[i] == '/')
+					Sleep(75);
 				else
 					printf("%c", text[i]);
 				text[i] = '\0';
@@ -716,7 +717,7 @@ void option(){
 }
 
 void log_out(){
-	puts("已成功登出!");
+	puts("成功登出！");
 	
 	game_save();
 	main();

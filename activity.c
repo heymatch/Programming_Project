@@ -50,8 +50,11 @@ void action_list_1(int code){
 	char text[10];
 	
 	while(protagonist_selection_check != code){
+		for(i = 0; i < 15; i++)
+			list[i] = 0;
 		fscanf(faction_list, "%d", &protagonist_selection_check);
 		i = 0;
+		input = 1;
 		while(input != 0){
 			fscanf(faction_list, "%d", &input);
 			list[i] = input;
@@ -85,8 +88,11 @@ void action_list_2(int code){
 	char text[10];
 	
 	while(protagonist_selection_check != code){
+		for(i = 0; i < 15; i++)
+			list[i] = 0;
 		fscanf(faction_list, "%d", &protagonist_selection_check);
 		i = 0;
+		input = 1;
 		while(input != 0){
 			fscanf(faction_list, "%d", &input);
 			list[i] = input;
@@ -120,8 +126,11 @@ void place_list(int code){
 	char text[10];
 	
 	while(protagonist_selection_check != code){
+		for(i = 0; i < 15; i++)
+			list[i] = 0;
 		fscanf(fplace_list, "%d", &protagonist_selection_check);
 		i = 0;
+		input = 1;
 		while(input != 0){
 			fscanf(fplace_list, "%d", &input);
 			list[i] = input;
@@ -162,13 +171,17 @@ void action_1(int selection){
 				printf("%s¡G", playername);
 			else if(name[0] == '*')
 				;
+			else if(name[0] == '/')
+				;
 			else
 				printf("%s¡G", name);
 			for(i = 0; text[i] != '\0'; i++){
 				if(text[i] == '%')
-					printf("%s¡G", playername);
+					printf("%s", playername);
 				else if(text[i] == '_')
 					printf(" ");
+				else if(text[i] == '/')
+					Sleep(75);
 				else
 					printf("%c", text[i]);
 				text[i] = '\0';
@@ -213,13 +226,17 @@ void action_2(int selection){
 				printf("%s¡G", playername);
 			else if(name[0] == '*')
 				;
+			else if(name[0] == '/')
+				;
 			else
 				printf("%s¡G", name);
 			for(i = 0; text[i] != '\0'; i++){
 				if(text[i] == '%')
-					printf("%s¡G", playername);
+					printf("%s", playername);
 				else if(text[i] == '_')
 					printf(" ");
+				else if(text[i] == '/')
+					Sleep(75);
 				else
 					printf("%c", text[i]);
 				text[i] = '\0';
@@ -264,13 +281,17 @@ void place(int selection){
 				printf("%s¡G", playername);
 			else if(name[0] == '*')
 				;
+			else if(name[0] == '/')
+				;
 			else
 				printf("%s¡G", name);
 			for(i = 0; text[i] != '\0'; i++){
 				if(text[i] == '%')
-					printf("%s¡G", playername);
+					printf("%s", playername);
 				else if(text[i] == '_')
 					printf(" ");
+				else if(text[i] == '/')
+					Sleep(75);
 				else
 					printf("%c", text[i]);
 				text[i] = '\0';
@@ -289,8 +310,6 @@ void place(int selection){
 		day_time++;
 	}
 	addition_activity_3(selection, code);
-	if(code != 1 && definition == 1)
-		day_time++;
 	
 	system("pause");
 	fclose(fplace);
