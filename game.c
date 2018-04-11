@@ -102,6 +102,11 @@ void game_main(){
 			addition_trigger(event_code);
 			pause(1);
 		}
+		else if(event_trigger(0, 1, 0, 0, 0, 1) == 1){
+			time_trigger(event_code);
+			addition_trigger(event_code);
+			pause(1);
+		}
 		else if(event_trigger(1, 0, 0, 0, 0, 1) == 1){
 			day_trigger(event_code);
 			addition_trigger(event_code);
@@ -153,6 +158,11 @@ void game_main(){
 			pause(1);
 		}
 		else if(event_trigger(0, 1, 0, 1, 0, 1) == 1){
+			time_trigger(event_code);
+			addition_trigger(event_code);
+			pause(1);
+		}
+		else if(event_trigger(0, 1, 0, 0, 0, 1) == 1){
 			time_trigger(event_code);
 			addition_trigger(event_code);
 			pause(1);
