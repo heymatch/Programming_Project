@@ -18,6 +18,8 @@ void protagonist_name_load(int code);
 
 int chat_quantity_load(int code);
 int greeting_quantity_load(int code);
+int action_quantity_load_1(int code);
+int action_quantity_load_2(int code);
 
 struct status{
 	int talent;
@@ -309,11 +311,36 @@ int greeting_quantity_load(int code){
 		return quantity;
 }
 
-int action_quantity_load(int code){
+int action_quantity_load_1(int code){
 	int code_check;
 	int action_check;
 	FILE *faction_quantity;
-	faction_quantity = fopen("data/text/action_quantity.txt", "r");
+	faction_quantity = fopen("data/text/action_quantity_1.txt", "r");
+	int quantity;
+	
+	rewind(faction_quantity);
+	while(!feof(faction_quantity)){
+		fscanf(faction_quantity, "%d %d %d", &code_check, &action_check, &quantity);
+		if(code_check == protagonist_selection && action_check == code){
+			break;
+		}
+		if(code_check == 0)
+			break;
+	}
+	
+	fclose(faction_quantity);
+	
+	if(quantity == 0)
+		return 1;
+	else
+		return quantity;
+}
+
+int action_quantity_load_2(int code){
+	int code_check;
+	int action_check;
+	FILE *faction_quantity;
+	faction_quantity = fopen("data/text/action_quantity_2.txt", "r");
 	int quantity;
 	
 	rewind(faction_quantity);

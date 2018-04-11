@@ -1,5 +1,0 @@
-5 1 1 test test
-5 2 1 q q
-0 0 0 eof eof
-
-const

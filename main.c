@@ -23,8 +23,8 @@ void pause(int n){
 }
 
 void version(){
-	puts("版本：1.0.7_beta");
-	puts("更新日：3/19");
+	puts("版本：1.0_released");
+	puts("更新日：4/11");
 }
 
 void system_message(int code){
