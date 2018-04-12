@@ -48,6 +48,7 @@ int event_trigger(int date, int time, int place, int phase, int action, int trig
 	for(f = 1; f <= 1; f++)
 		if(date == a && date_definition(date) == a && time == b && time_definition(time) == b && place == c &&place_definition(place) == c && action == d &&action_definition(action) == d && phase == e && phase_definition(phase) == e && triggered == f && event_definition(triggered) == f)
 			return 1;
+	event_code = -1;		
 	return 0;
 }
 

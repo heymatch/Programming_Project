@@ -85,31 +85,37 @@ void game_main(){
 		if(event_trigger(1, 1, 0, 1, 0, 1) == 1){
 			day_trigger(event_code);
 			addition_trigger(event_code);
+			puts("1");
 			pause(1);
 		}
 		else if(event_trigger(1, 1, 0, 0, 0, 1) == 1){
 			day_trigger(event_code);
 			addition_trigger(event_code);
+			puts("2");
 			pause(1);
 		}
 		else if(event_trigger(1, 0, 0, 1, 0, 1) == 1){
 			day_trigger(event_code);
 			addition_trigger(event_code);
+			puts("3");
 			pause(1);
 		}
 		else if(event_trigger(0, 1, 0, 1, 0, 1) == 1){
 			time_trigger(event_code);
 			addition_trigger(event_code);
+			puts("4");
 			pause(1);
 		}
 		else if(event_trigger(0, 1, 0, 0, 0, 1) == 1){
 			time_trigger(event_code);
 			addition_trigger(event_code);
+			puts("5");
 			pause(1);
 		}
 		else if(event_trigger(1, 0, 0, 0, 0, 1) == 1){
 			day_trigger(event_code);
 			addition_trigger(event_code);
+			puts("6");
 			pause(1);
 		}
 		day_skip();
