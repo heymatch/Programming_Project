@@ -46,7 +46,6 @@ int activity_definition;
 int protagonist_selection;
 
 int extern user_id;
-int extern protagonist_selection;
 
 void game_load(){
 	pause(2);
@@ -60,6 +59,7 @@ void game_load(){
 	information_load();
 	protagonist_selection_load();
 	course_record_load();
+	player_birthday_load();
 	
 	talent_load(protagonist_selection);
 	protagonist_name_load(protagonist_selection);

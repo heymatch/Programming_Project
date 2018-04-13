@@ -42,13 +42,13 @@ void ending_happy(int code){
 		fscanf(fending_happy, "%d %[^ ] %s", &code_check, name, text);
 		if(code_check == code){
 			if(name[0] == '%')
-				printf("%s", playername);
+				printf("%s¡G", playername);
 			else if(name[0] == '*')
 				;
 			else if(name[0] == '/')
 				;	
 			else
-				printf("%s", name);
+				printf("%s¡G", name);
 			for(i = 0; text[i] != '\0'; i++){
 				if(text[i] == '%')
 					printf("%s", playername);
@@ -86,13 +86,13 @@ void ending_bad(int code){
 		fscanf(fending_bad, "%d %[^ ] %s", &code_check, name, text);
 		if(code_check == code){
 			if(name[0] == '%')
-				printf("%s", playername);
+				printf("%s¡G", playername);
 			else if(name[0] == '*')
 				;
 			else if(name[0] == '/')
 				;	
 			else
-				printf("%s", name);
+				printf("%s¡G", name);
 			for(i = 0; text[i] != '\0'; i++){
 				if(text[i] == '%')
 					printf("%s", playername);
@@ -129,13 +129,13 @@ void thanks(int code){
 		fscanf(fthanks, "%d %[^ ] %s", &code_check, name, text);
 		if(code_check == code){
 			if(name[0] == '%')
-				printf("%s", playername);
+				printf("%s¡G", playername);
 			else if(name[0] == '*')
 				;
 			else if(name[0] == '/')
 				;
 			else
-				printf("%s", name);
+				printf("%s¡G", name);
 			for(i = 0; text[i] != '\0'; i++){
 				if(text[i] == '%')
 					printf("%s", playername);

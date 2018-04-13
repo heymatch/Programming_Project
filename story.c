@@ -335,10 +335,7 @@ void birthday_trigger(){
 				Sleep(75);
 			}
 			printf("\n");
-			definition = 1;
 		}
-		if(definition == 1)
-			break;
 		if(code_check == 0 && protagonist_selection_check == 0)
 			break;
 	}

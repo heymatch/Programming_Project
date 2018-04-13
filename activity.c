@@ -11,6 +11,7 @@ void addition_activity_1(int selection, int code);
 void addition_activity_2(int selection, int code);
 void addition_activity_3(int selection, int code);
 void extra_lesson();
+void status_limit();
 
 float calculate(int talent, int record);
 
@@ -340,6 +341,7 @@ void addition_trigger(int code){
 	social.now += definition[3];
 	science.now += definition[4];
 	favorability.now += definition[5];
+	status_limit();
 }
 
 void addition_activity_1(int selection, int code){
@@ -365,6 +367,7 @@ void addition_activity_1(int selection, int code){
 	social.now += definition[3];
 	science.now += definition[4];
 	favorability.now += definition[5];
+	status_limit();
 }
 
 void addition_activity_2(int selection, int code){
@@ -390,6 +393,7 @@ void addition_activity_2(int selection, int code){
 	social.now += definition[3];
 	science.now += definition[4];
 	favorability.now += definition[5];
+	status_limit();
 }
 
 void addition_activity_3(int selection, int code){
@@ -415,6 +419,7 @@ void addition_activity_3(int selection, int code){
 	social.now += definition[3];
 	science.now += definition[4];
 	favorability.now += definition[5];
+	status_limit();
 }
 
 void extra_lesson(){
@@ -549,4 +554,18 @@ void extra_lesson(){
 		}
 	}
 	
+}
+
+void status_limit(){
+	if(chinese.now > status_max)
+			chinese.now = status_max;
+	if(english.now > status_max)
+			english.now = status_max;
+	if(math.now > status_max)
+			math.now = status_max;
+	if(social.now > status_max)
+			social.now = status_max;
+	if(science.now > status_max)
+			science.now = status_max;
+			
 }
