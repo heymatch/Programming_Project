@@ -55,6 +55,7 @@ char extern protagonistname[20];
 
 void game_main(){
 	pause(2);
+	event_code = -1;
 	//­º¦¸µù¥U 
 	if(first_sign_in_definition == 1){
 		game_load();
@@ -71,12 +72,13 @@ void game_main(){
 	}
 	
 	if(game_time(3) == 1){
+		phase_calculate();
 		ending();
 		game_save();
 		main();
 	}
 	
-	phase_calculate(); 
+	phase_calculate();
 	
 	if((game_time(0) == 2 || game_time(0) == 3 || holiday_definition(day_now) == 1) && daytime_definition(day_now) == 0){
 		if(day_time == 1)
